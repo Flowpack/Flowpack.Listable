@@ -11,7 +11,7 @@ Sfi:
     list:
       rootNode: 'site'
       numberOfItems: 10000
-      paginationEnabled: false
+      paginationEnabled: true
       pagination:
         itemsPerPage: 24
         maximumNumberOfLinks: 20
