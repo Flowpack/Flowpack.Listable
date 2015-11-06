@@ -1,0 +1,8 @@
+# This object is used to render items in a list automatically with object of type ObjectType + Short
+prototype(Sfi.Listable:ContentCaseShort) < prototype(TYPO3.Neos:ContentCase) {
+	default {
+		@position = 'end'
+		condition = TRUE
+		type = ${q(node).property('_nodeType.name') + 'Short'}
+	}
+}

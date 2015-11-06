@@ -1,0 +1,116 @@
+'Sfi.Listable:List':
+  superTypes:
+    - 'TYPO3.Neos:Content'
+  ui:
+    label: 'List of listable things'
+    icon: icon-list
+    inlineEditable: true
+    inspector:
+      groups:
+        list:
+          label: 'List settings'
+  properties:
+    paginationEnabled:
+      type: boolean
+      ui:
+        label: 'Enable pagination'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    sortProperty:
+      type: string
+      defaultValue: 'date'
+      ui:
+        label: 'Sort property'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    sortOrder:
+      type: string
+      defaultValue: 'DESC'
+      ui:
+        label: 'Sort order'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    wrapClass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Wrap class'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    class:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'List class'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    itemClass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Item class'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    listTitleClass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'List title class'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    listTitle:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'List title'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    itemRenderer:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'itemRenderer'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    rootNode:
+      type: reference
+      ui:
+        label: 'Root node (defaults to current page)'
+        reloadIfChanged: TRUE
+        inspector:
+          group: 'list'
+          editorOptions:
+            nodeTypes: ['TYPO3.Neos:Document']
+    archiveLink:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Archive link'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    archiveLinkTitle:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Archive link title'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    archiveLinkClass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'Archive link class name'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'

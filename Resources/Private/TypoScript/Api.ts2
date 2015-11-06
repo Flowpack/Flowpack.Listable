@@ -1,0 +1,57 @@
+############# Everything in this file is a public API #############
+
+prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
+	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
+	configuration = ${configuration}
+
+	attributes = TYPO3.TypoScript:Attributes {
+		class = ${configuration.class}
+	}
+	@override.itemRendererString = ${configuration.itemRenderer ? configuration.itemRenderer : 'Sfi.Listable:ContentCaseShort'}
+
+	itemRenderer.itemRendererByObject {
+		condition = ${itemRendererString}
+		@position = 'start'
+		type = ${itemRendererString}
+	}
+	templatePath = 'resource://Sfi.Listable/Private/Templates/Listable.html'
+	collection = TYPO3.TypoScript:Case {
+		getFromCurrentPage {
+			condition = ${configuration.queryType == 'getFromCurrentPage'}
+			renderer = ${q(documentNode).find('[instanceof Sfi.Listable:Listable]').get()}
+		}
+		getAll {
+			condition = ${true}
+			renderer = ${q(site).find('[instanceof Sfi.Listable:Listable]').get()}
+		}
+	}
+	collection.@process.sort = ${q(value).count() > 0 && configuration.sortProperty ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
+	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+}
+
+prototype(Sfi.Listable:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
+	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
+	configuration = ${configuration}
+
+	attributes.class = ${configuration.wrapClass}
+	content = TYPO3.TypoScript:Array {
+		listTitleTag = TYPO3.TypoScript:Tag {
+			tagName = 'h2'
+			attributes.class = ${configuration.listTitleClass}
+			content = ${configuration.listTitle}
+			@if.isSet = ${configuratListableion.listTitle != ''}
+		}
+		list = Sfi.Listable:Listable {
+			configuration = ${configuration}
+		}
+		archiveLink = TYPO3.TypoScript:Tag {
+			tagName = 'a'
+			attributes.class = ${configuration.archiveLinkClass}
+			attributes.href = TYPO3.Neos:NodeUri {
+				node = ${configuration.archiveLink}
+			}
+			content = ${configuration.archiveLinkTitle}
+			@if.isSet = ${configuration.archiveLink != ''}
+		}
+	}
+}

@@ -1,0 +1,28 @@
+TYPO3:
+  Neos:
+    typoScript:
+      autoInclude:
+        Sfi.Listable: true
+  TypoScript:
+    defaultContext:
+      NodeConfiguration: 'Sfi\Listable\TypoScript\Eel\Helper\ConfigurationHelper'
+Sfi:
+  Listable:
+    list:
+      rootNode: 'site'
+      numberOfItems: 10000
+      paginationEnabled: false
+      pagination:
+        itemsPerPage: 24
+        maximumNumberOfLinks: 20
+      sortOrder: 'DESC'
+      sortProperty: 'date'
+      itemRenderer: 'Sfi.Listable:ContentCaseShort'
+      listTitle: ''
+      listTitleClass: ''
+      wrapClass: ''
+      class: ''
+      itemClass: ''
+      archiveLink: ''
+      archiveLinkTitle: ''
+      archiveLinkClass: ''

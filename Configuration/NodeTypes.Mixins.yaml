@@ -1,0 +1,5 @@
+'Sfi.Listable:ListableMixin':
+  abstract: TRUE
+
+'Sfi.Listable:ListableCategoryMixin':
+  abstract: TRUE

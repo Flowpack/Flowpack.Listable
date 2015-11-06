@@ -1,0 +1,30 @@
+{namespace neos=TYPO3\Neos\ViewHelpers}
+{namespace typo3cr=TYPO3\TYPO3CR\ViewHelpers}
+{namespace ts=TYPO3\TypoScript\ViewHelpers}
+
+<f:if condition="{collection}">
+	<f:if condition="{configuration.paginationEnabled}">
+		<f:then>
+			<f:if condition="{configuration.pagination}">
+				<typo3cr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{configuration.pagination}">
+					<ul{attributes -> f:format.raw()} >
+						<f:for each="{paginatedItems}" as="item">
+							<li class="{configuration.itemClass}">
+								<ts:render path="itemRenderer" context="{node: item, inputConfiguration: configuration}" />
+							</li>
+						</f:for>
+					</ul>
+				</typo3cr:widget.paginate>
+			</f:if>
+		</f:then>
+		<f:else>
+			<ul{attributes -> f:format.raw()}>
+				<f:for each="{collection}" as="item">
+					<li class="{configuration.itemClass}">
+						<ts:render path="itemRenderer" context="{node: item, inputConfiguration: configuration}" />
+					</li>
+				</f:for>
+			</ul>
+		</f:else>
+	</f:if>
+</f:if>
