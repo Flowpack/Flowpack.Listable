@@ -6,7 +6,7 @@ prototype(Sfi.Listable:List) < prototype(Sfi.Listable:List) {
 	prototype(Sfi.Listable:Listable) {
 		collection.getFromRootNode {
 			condition = ${true}
-			renderer = ${q(rootNode).children('[instanceof Sfi.Listable:Listable]').get()}
+			renderer = ${q(rootNode).children('[instanceof Sfi.Listable:ListableMixin]').get()}
 		}
 	}
 

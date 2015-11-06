@@ -18,11 +18,11 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	collection = TYPO3.TypoScript:Case {
 		getFromCurrentPage {
 			condition = ${configuration.queryType == 'getFromCurrentPage'}
-			renderer = ${q(documentNode).find('[instanceof Sfi.Listable:Listable]').get()}
+			renderer = ${q(documentNode).find('[instanceof Sfi.Listable:ListableMixin]').get()}
 		}
 		getAll {
 			condition = ${true}
-			renderer = ${q(site).find('[instanceof Sfi.Listable:Listable]').get()}
+			renderer = ${q(site).find('[instanceof Sfi.Listable:ListableMixin]').get()}
 		}
 	}
 	collection.@process.sort = ${q(value).count() > 0 && configuration.sortProperty ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
