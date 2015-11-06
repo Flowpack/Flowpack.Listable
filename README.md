@@ -5,7 +5,8 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 
 # TL;DR
 
-1. Add `Sfi.Listable:ListableMixin` to nodetypes that you want to list
+1. Install the package with composer. [Here it is on packagist](https://packagist.org/packages/sfi/listable).
+2. Add `Sfi.Listable:ListableMixin` to nodetypes that you want to list.
 2. Build your list based on `Sfi.Listable:Listable` for simple list or on `Sfi.Listable:List` for list with a header and an archive link.
 3. For each of your nodetypes create a new TS object of type NodeTypeNam + 'Short', or manually definy a rendering object.
 4. Rely on public API keys when overriding settings.
