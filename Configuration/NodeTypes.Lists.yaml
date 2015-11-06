@@ -33,6 +33,14 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+    limit:
+      type: string
+      defaultValue: '10000'
+      ui:
+        label: 'Limit'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
     wrapClass:
       type: string
       defaultValue: ''

@@ -1,23 +1,39 @@
-############# Everything in this file is a public API #############
+############# All objects in this file are public API #############
 
 prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
-	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
-	configuration = ${configuration}
+	# These settings are public API:
+	@context.listClass = ${listClass ? listClass : ''}
+	@context.itemClass = ${itemClass ? itemClass : ''}
+	@context.queryType = ${queryType ? queryType : ''}
+	@context.sortProperty = 'date'
+	@context.sortOrder = 'DESC'
+	@context.limit = 10000
+	@context.itemRenderer = ${itemRenderer ? itemRenderer : ''}
+	@context.paginationEnabled = ${paginationEnabled ? paginationEnabled : true}
+	@context.itemsPerPage = ${itemsPerPage ? itemsPerPage : 24}
+	@context.maximumNumberOfLinks = ${maximumNumberOfLinks ? maximumNumberOfLinks : 15}
+
+	itemClass = ${itemClass}
+	paginationEnabled = ${paginationEnabled}
+	pagination = TYPO3.TypoScript:RawArray {
+		itemsPerPage = ${itemsPerPage}
+		maximumNumberOfLinks = ${maximumNumberOfLinks}
+	}
 
 	attributes = TYPO3.TypoScript:Attributes {
-		class = ${configuration.listClass}
+		class = ${listClass}
 	}
 
 	itemRenderer = Sfi.Listable:ContentCaseShort
 	itemRenderer.itemRendererByObject {
-		condition = ${configuration.itemRenderer != ''}
+		condition = ${itemRenderer != ''}
 		@position = 'start'
-		type = ${configuration.itemRenderer}
+		type = ${itemRenderer}
 	}
 	templatePath = 'resource://Sfi.Listable/Private/Templates/Listable.html'
 	collection = TYPO3.TypoScript:Case {
 		getFromCurrentPage {
-			condition = ${configuration.queryType == 'getFromCurrentPage'}
+			condition = ${queryType == 'getFromCurrentPage'}
 			renderer = ${q(documentNode).find('[instanceof Sfi.Listable:ListableMixin]').get()}
 		}
 		getAll {
@@ -25,33 +41,37 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 			renderer = ${q(site).find('[instanceof Sfi.Listable:ListableMixin]').get()}
 		}
 	}
-	collection.@process.sort = ${q(value).count() > 0 && configuration.sortProperty ? q(value).sort(configuration.sortProperty, configuration.sortOrder).get() : value}
-	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
+	collection.@process.sort = ${q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
+	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(limit)).get() : value}
 }
 
+# This convienince object wraps Listable with title and archive link
 prototype(Sfi.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
-	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
-	configuration = ${configuration}
+	# These settings are public API:
+	@context.wrapClass = ''
+	@context.listTitle = ''
+	@context.listTitleClass = ''
+	@context.archiveLink = ''
+	@context.archiveLinkTitle = ''
+	@context.archiveLinkClass = ''
 
-	attributes.class = ${configuration.wrapClass}
+	attributes.class = ${wrapClass}
 	content = TYPO3.TypoScript:Array {
 		listTitleTag = TYPO3.TypoScript:Tag {
 			tagName = 'h2'
-			attributes.class = ${configuration.listTitleClass}
-			content = ${configuration.listTitle}
-			@if.isSet = ${configuratListableion.listTitle != ''}
+			attributes.class = ${listTitleClass}
+			content = ${listTitle}
+			@if.isSet = ${listTitle != ''}
 		}
-		list = Sfi.Listable:Listable {
-			configuration = ${configuration}
-		}
+		list = Sfi.Listable:Listable
 		archiveLink = TYPO3.TypoScript:Tag {
 			tagName = 'a'
-			attributes.class = ${configuration.archiveLinkClass}
+			attributes.class = ${archiveLinkClass}
 			attributes.href = TYPO3.Neos:NodeUri {
-				node = ${configuration.archiveLink}
+				node = ${archiveLink}
 			}
-			content = ${configuration.archiveLinkTitle}
-			@if.isSet = ${configuration.archiveLink != ''}
+			content = ${archiveLinkTitle}
+			@if.isSet = ${archiveLink != ''}
 		}
 	}
 }

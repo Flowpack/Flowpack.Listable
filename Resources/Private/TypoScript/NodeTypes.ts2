@@ -1,9 +1,23 @@
+# This object is experimental and may not be working yet
 prototype(Sfi.Listable:ListNode) < prototype(Sfi.Listable:List) {
-	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
-	@override.configuration.@process.mergeConfiguration = ${NodeConfiguration.mergeWithNodeProperties(value, node)}
 	@override.rootNode = ${q(node).property('rootNode') ? q(node).property('rootNode') : documentNode}
+	@override.wrapClass = ${q(node).property('wrapClass')}
+	@override.listTitle = ${q(node).property('listTitle')}
+	@override.listTitleClass = ${q(node).property('listTitleClass')}
+	@override.archiveLink = ${q(node).property('archiveLink')}
+	@override.archiveLinkTitle = ${q(node).property('archiveLinkTitle')}
+	@override.archiveLinkClass = ${q(node).property('archiveLinkClass')}
 
 	prototype(Sfi.Listable:Listable) {
+		@context.listClass = ${q(node).property('listClass')}
+		@context.itemClass = ${q(node).property('itemClass')}
+		@context.sortProperty = ${q(node).property('sortProperty')}
+		@context.sortOrder = ${q(node).property('sortOrder')}
+		@context.limit = ${q(node).property('limit')}
+		@context.itemRenderer = ${q(node).property('itemRenderer')}
+		@context.paginationEnabled = ${q(node).property('paginationEnabled')}
+
+
 		collection.getFromRootNode {
 			condition = ${true}
 			renderer = ${q(rootNode).children('[instanceof Sfi.Listable:ListableMixin]').get()}

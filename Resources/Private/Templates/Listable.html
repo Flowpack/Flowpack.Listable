@@ -3,14 +3,14 @@
 {namespace ts=TYPO3\TypoScript\ViewHelpers}
 
 <f:if condition="{collection}">
-	<f:if condition="{configuration.paginationEnabled}">
+	<f:if condition="{paginationEnabled}">
 		<f:then>
-			<f:if condition="{configuration.pagination}">
-				<typo3cr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{configuration.pagination}">
+			<f:if condition="{pagination}">
+				<typo3cr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{pagination}">
 					<ul{attributes -> f:format.raw()} >
 						<f:for each="{paginatedItems}" as="item">
-							<li class="{configuration.itemClass}">
-								<ts:render path="itemRenderer" context="{node: item, inputConfiguration: configuration}" />
+							<li class="{itemClass}">
+								<ts:render path="itemRenderer" context="{node: item}" />
 							</li>
 						</f:for>
 					</ul>
@@ -20,8 +20,8 @@
 		<f:else>
 			<ul{attributes -> f:format.raw()}>
 				<f:for each="{collection}" as="item">
-					<li class="{configuration.itemClass}">
-						<ts:render path="itemRenderer" context="{node: item, inputConfiguration: configuration}" />
+					<li class="{itemClass}">
+						<ts:render path="itemRenderer" context="{node: item}" />
 					</li>
 				</f:for>
 			</ul>
