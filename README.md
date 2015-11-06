@@ -7,9 +7,12 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 
 1. Add `Sfi.Listable:ListableMixin` to nodetypes that you want to list
 2. Build your list based on `Sfi.Listable:Listable` for simple list or on `Sfi.Listable:List` for list with a header and an archive link.
-3. Rely on public API keys when overriding settings.
+3. For each of your nodetypes create a new TS object of type NodeTypeNam + 'Short', or manually definy a rendering object.
+4. Rely on public API keys when overriding settings.
 
 [See here](https://github.com/sfi-ru/KateheoDistr/blob/master/Packages/Sites/Sfi.Kateheo/Resources/Private/TypoScript/NodeTypes/PageMain.ts2#L5) for a trivial integration example.
+
+If you don't need the package, but love TypoScript, [look here](https://github.com/sfi-ru/Sfi.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
 
 # Nodetype mixins
 
