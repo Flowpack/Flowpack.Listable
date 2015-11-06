@@ -3,6 +3,3 @@ TYPO3:
     typoScript:
       autoInclude:
         Sfi.Listable: true
-  TypoScript:
-    defaultContext:
-      NodeConfiguration: 'Sfi\Listable\TypoScript\Eel\Helper\ConfigurationHelper'
