@@ -1,4 +1,4 @@
-'Sfi.Listable:List':
+'Sfi.Listable:ListNode':
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:

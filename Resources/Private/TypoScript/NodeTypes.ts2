@@ -1,4 +1,4 @@
-prototype(Sfi.Listable:List) < prototype(Sfi.Listable:List) {
+prototype(Sfi.Listable:ListNode) < prototype(Sfi.Listable:List) {
 	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
 	@override.configuration.@process.mergeConfiguration = ${NodeConfiguration.mergeWithNodeProperties(value, node)}
 	@override.rootNode = ${q(node).property('rootNode') ? q(node).property('rootNode') : documentNode}

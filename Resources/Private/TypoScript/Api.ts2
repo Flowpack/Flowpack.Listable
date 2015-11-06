@@ -5,14 +5,14 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	configuration = ${configuration}
 
 	attributes = TYPO3.TypoScript:Attributes {
-		class = ${configuration.class}
+		class = ${configuration.listClass}
 	}
-	@override.itemRendererString = ${configuration.itemRenderer ? configuration.itemRenderer : 'Sfi.Listable:ContentCaseShort'}
 
+	itemRenderer = Sfi.Listable:ContentCaseShort
 	itemRenderer.itemRendererByObject {
-		condition = ${itemRendererString}
+		condition = ${configuration.itemRenderer != ''}
 		@position = 'start'
-		type = ${itemRendererString}
+		type = ${configuration.itemRenderer}
 	}
 	templatePath = 'resource://Sfi.Listable/Private/Templates/Listable.html'
 	collection = TYPO3.TypoScript:Case {
@@ -29,7 +29,7 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(configuration.numberOfItems)).get() : value}
 }
 
-prototype(Sfi.Listable:AbstractList) < prototype(TYPO3.TypoScript:Tag) {
+prototype(Sfi.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	@override.configuration = ${Configuration.setting('Sfi.Listable.list')}
 	configuration = ${configuration}
 
