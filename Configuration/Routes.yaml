@@ -1,0 +1,30 @@
+# Add something like this to Routes.yaml of your distribution, but before Neos routes!
+#
+# -
+#   name: 'Listable'
+#   uriPattern: '<ListableSubroutes>'
+#   subRoutes:
+#     'ListableSubroutes':
+#       package: 'Sfi.Listable'
+#       variables:
+#         'defaultUriSuffix': ''
+#         'pageSeparator': '-p'
+
+-
+  name: 'Paginate for Sfi.Listable:Listable'
+  uriPattern:    '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
+  defaults:
+    '@package':    'TYPO3.Neos'
+    '@controller': 'Frontend\Node'
+    '@format':     'html'
+    '@action':     'show'
+    '--listable-paginate':
+      '@package': ''
+      '@subpackage': ''
+      '@controller': ''
+      '@action': 'index'
+      'currentPage': '1'
+  routeParts:
+    node:
+      handler: TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+  appendExceedingArguments: TRUE

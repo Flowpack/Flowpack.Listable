@@ -53,3 +53,14 @@ This object takes `Sfi.Listable:Listable` and wraps it with just that.
 | archiveLink | Nodepath for archive link | '' |
 | archiveLinkTitle | Title of an archive link | '' |
 | archiveLinkClass | Classname of an archive link | '' |
+
+# Configuring pagination
+
+Besides enabling pagination in TS object, you must not forget about adding pagination entryIdentifier to all parent cache objects, e.g. like this:
+
+```
+prototype(TYPO3.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+```
+
+To make urls pretty, see [Routes.yaml](https://github.com/sfi-ru/Sfi.Listable/blob/master/Configuration/Routes.yaml).
