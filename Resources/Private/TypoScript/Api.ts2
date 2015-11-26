@@ -55,15 +55,17 @@ prototype(Sfi.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	@context.archiveLinkTitle = ''
 	@context.archiveLinkClass = ''
 
+	@context.list = Sfi.Listable:Listable
+
 	attributes.class = ${wrapClass}
 	content = TYPO3.TypoScript:Array {
 		listTitleTag = TYPO3.TypoScript:Tag {
 			tagName = 'h2'
 			attributes.class = ${listTitleClass}
 			content = ${listTitle}
-			@if.isSet = ${listTitle != ''}
+			@if.isSet = ${!String.isBlank(listTitle) && !String.isBlank(list)}
 		}
-		list = Sfi.Listable:Listable
+		list = ${list}
 		archiveLink = TYPO3.TypoScript:Tag {
 			tagName = 'a'
 			attributes.class = ${archiveLinkClass}
