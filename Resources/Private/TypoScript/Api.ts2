@@ -8,6 +8,7 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	@context.sortProperty = 'date'
 	@context.sortOrder = 'DESC'
 	@context.limit = 10000
+	@context.offset = 0
 	@context.itemRenderer = ${itemRenderer ? itemRenderer : ''}
 	@context.paginationEnabled = ${paginationEnabled ? paginationEnabled : true}
 	@context.itemsPerPage = ${itemsPerPage ? itemsPerPage : 24}
@@ -42,7 +43,7 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 		}
 	}
 	collection.@process.sort = ${q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
-	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(0, String.toInteger(limit)).get() : value}
+	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(String.toInteger(offset), String.toInteger(limit)).get() : value}
 }
 
 # This convienince object wraps Listable with title and archive link
