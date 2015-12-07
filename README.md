@@ -25,7 +25,7 @@ Keys documented here are considered public API and would be treated with semanti
 
 ## Sfi.Listable:Listable
 
-At the heart of this package is a `Sfi.Listable:Listable` object. It provides some good defaults for rendering lists of things, and is pretty extensible too. Here are TypoScript context variables that you can configure for this object:
+At the heart of this package is a `Sfi.Listable:Listable` object. It provides some basic means for rendering lists of things (like quering, sorting, paginating etc), and is pretty extensible too. Here are TypoScript context variables that you can configure for this object:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
@@ -34,6 +34,7 @@ At the heart of this package is a `Sfi.Listable:Listable` object. It provides so
 | sortProperty | Sort by property | 'date' |
 | sortOrder | Sort order | 'DESC' |
 | limit | Limit number of results. Set to high number when using with pagination | 10000 |
+| offset | Offset results by some value (i.e. skip a number of first records) | 0 |
 | paginationEnabled | Enable pagination | true |
 | itemsPerPage | Number of items per page when using pagination | 24 |
 | maximumNumberOfLinks | Number of page links in pagination | 15 |
@@ -44,6 +45,9 @@ At the heart of this package is a `Sfi.Listable:Listable` object. It provides so
 
 There's often a need to render a list with a header an a archive link.
 This object takes `Sfi.Listable:Listable` and wraps it with just that.
+
+This is just a helper object, and in many cases you would not want to use it,
+but use `Sfi.Listable:Listable` directly.
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
