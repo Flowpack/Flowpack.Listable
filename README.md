@@ -41,6 +41,15 @@ At the heart of this package is a `Sfi.Listable:Listable` object. It provides so
 | queryType | Predefined query types, choose between `getFromCurrentPage` and `getAll` | 'getAll' |
 | itemRenderer | Object used for rendering child items | 'Sfi.Listable:ContentCaseShort' |
 
+You may also override `collection` key with custom query. Sorting and pagination would still apply (via `@process`). Here's an example that lists first 10 objects of type `Something.Custom:Here`.
+
+```
+prototype(My.Custom:Object) < prototype(Sfi.Listable:Listable) {
+  @context.limit = 10
+  collection = ${q(site).find('[instanceof Something.Custom:Here]').get()}}
+}
+```
+
 ## Sfi.Listable:List
 
 There's often a need to render a list with a header an a archive link.
