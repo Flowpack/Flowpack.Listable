@@ -1,6 +1,12 @@
 # Listable
 
-This Neos package solves one problem: help you list any nodes in TypoScript.
+For the neos user interface, this package provides a content element "List" (experimental) that can render a list of nodes with a ListableMixin that can be added to node types that you want to list.
+
+As a website creator, you usually simply render lists with one Fluid template that has a ``for`` statement that iterates over a list item collection you passed to it (best MVC practice). https://neos.readthedocs.org/en/stable/CreatingASite/RenderingCustomMarkup/Templating.html
+
+If using this package from typoscript, you have to pass a collection to a typoscript object instead, togher with template generation parameters that this package provides, and it returns the rendered html based on its default template plus your custom ``*Short`` item template. Thus, instead of using a typoscript controller only to assemble the list object to be rendered and leaving the rendering enirely to the Fluid templating features, you now define rendering features (like classes etc.) as parameters of this package's typoscript objects.
+
+
 The idea is very simple: you often need to display list of things (e.g. news, articles etc), and the concern of listing items should better be separated from the concern of rendering items. This packages provides a solid foundation for listing, while allowing you to take care of rendering stuff on your own.
 
 # TL;DR
@@ -13,7 +19,7 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 
 [See here](https://github.com/sfi-ru/KateheoDistr/blob/master/Packages/Sites/Sfi.Kateheo/Resources/Private/TypoScript/NodeTypes/PageMain.ts2#L5) for a trivial integration example.
 
-If you don't need the package, but love TypoScript, [look here](https://github.com/sfi-ru/Sfi.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
+If you don't need the package, but want to see how list generation is done in TypoScript, [look here](https://github.com/sfi-ru/Sfi.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
 
 # Nodetype mixins
 
