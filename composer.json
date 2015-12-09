@@ -1,5 +1,8 @@
 {
 	"name": "flowpack/listable",
+	"replace": {
+		"sfi/listable":"v0.1"
+	}
 	"type": "typo3-flow-package",
 	"description": "Tiny extension for listing things",
 	"require": {
