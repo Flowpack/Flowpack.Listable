@@ -13,7 +13,7 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 
 [See here](https://github.com/sfi-ru/KateheoDistr/blob/master/Packages/Sites/Sfi.Kateheo/Resources/Private/TypoScript/NodeTypes/PageMain.ts2#L5) for a trivial integration example.
 
-If you don't need the package, but love TypoScript, [look here](https://github.com/sfi-ru/Flowpack.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
+If you don't need the package, but love TypoScript, [look here](https://github.com/Flowpack/Flowpack.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
 
 # Nodetype mixins
 
@@ -76,4 +76,4 @@ prototype(TYPO3.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginA
 root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 ```
 
-To make urls pretty, see [Routes.yaml](https://github.com/sfi-ru/Flowpack.Listable/blob/master/Configuration/Routes.yaml).
+To make urls pretty, see [Routes.yaml](https://github.com/flowpack/Flowpack.Listable/blob/master/Configuration/Routes.yaml).
