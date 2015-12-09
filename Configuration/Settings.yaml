@@ -2,4 +2,4 @@ TYPO3:
   Neos:
     typoScript:
       autoInclude:
-        Sfi.Listable: true
+        Flowpack.Listable: true

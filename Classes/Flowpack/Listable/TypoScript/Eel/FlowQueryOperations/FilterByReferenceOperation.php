@@ -1,8 +1,8 @@
 <?php
-namespace Sfi\Listable\TypoScript\Eel\FlowQueryOperations;
+namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Sfi.Listable".          *
+ * This script belongs to the TYPO3 Flow package "Flowpack.Listable".          *
  *                                                                        *
  *                                                                        */
 

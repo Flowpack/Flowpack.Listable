@@ -1,5 +1,5 @@
-'Sfi.Listable:ListableMixin':
+'Flowpack.Listable:ListableMixin':
   abstract: TRUE
 
-'Sfi.Listable:ListableCategoryMixin':
+'Flowpack.Listable:ListableCategoryMixin':
   abstract: TRUE

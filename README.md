@@ -5,27 +5,27 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 
 # TL;DR
 
-1. Install the package with composer. [Here it is on packagist](https://packagist.org/packages/sfi/listable).
-2. Add `Sfi.Listable:ListableMixin` to nodetypes that you want to list.
-2. Build your list based on `Sfi.Listable:Listable` for simple list or on `Sfi.Listable:List` for list with a header and an archive link.
+1. Install the package with composer. [Here it is on packagist](https://packagist.org/packages/flowpack/listable).
+2. Add `Flowpack.Listable:ListableMixin` to nodetypes that you want to list.
+2. Build your list based on `Flowpack.Listable:Listable` for simple list or on `Flowpack.Listable:List` for list with a header and an archive link.
 3. For each of your nodetypes create a new TS object of type NodeTypeName + 'Short', or manually definy a rendering object.
 4. Rely on public API keys when overriding settings.
 
 [See here](https://github.com/sfi-ru/KateheoDistr/blob/master/Packages/Sites/Sfi.Kateheo/Resources/Private/TypoScript/NodeTypes/PageMain.ts2#L5) for a trivial integration example.
 
-If you don't need the package, but love TypoScript, [look here](https://github.com/sfi-ru/Sfi.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
+If you don't need the package, but love TypoScript, [look here](https://github.com/sfi-ru/Flowpack.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
 
 # Nodetype mixins
 
-On data level we provide only one mixin: `Sfi.Listable:ListableMixin`. The only thing you have to do, is to add this mixin to nodetypes that you would want to list with this package. That's right, planing all other fields is completely up to you.
+On data level we provide only one mixin: `Flowpack.Listable:ListableMixin`. The only thing you have to do, is to add this mixin to nodetypes that you would want to list with this package. That's right, planing all other fields is completely up to you.
 
 # TypoScript objects
 
 Keys documented here are considered public API and would be treated with semantic versioning in mind. Extend all other properties at your own risk.
 
-## Sfi.Listable:Listable
+## Flowpack.Listable:Listable
 
-At the heart of this package is a `Sfi.Listable:Listable` object. It provides some basic means for rendering lists of things (like quering, sorting, paginating etc), and is pretty extensible too. Here are TypoScript context variables that you can configure for this object:
+At the heart of this package is a `Flowpack.Listable:Listable` object. It provides some good defaults for rendering lists of things, and is pretty extensible too. Here are TypoScript context variables that you can configure for this object:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
@@ -50,13 +50,13 @@ prototype(My.Custom:Object) < prototype(Sfi.Listable:Listable) {
 }
 ```
 
-## Sfi.Listable:List
+## Flowpack.Listable:List
 
 There's often a need to render a list with a header an a archive link.
-This object takes `Sfi.Listable:Listable` and wraps it with just that.
+This object takes `Flowpack.Listable:Listable` and wraps it with just that.
 
 This is just a helper object, and in many cases you would not want to use it,
-but use `Sfi.Listable:Listable` directly.
+but use `Flowpack.Listable:Listable` directly.
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
@@ -76,4 +76,4 @@ prototype(TYPO3.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginA
 root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 ```
 
-To make urls pretty, see [Routes.yaml](https://github.com/sfi-ru/Sfi.Listable/blob/master/Configuration/Routes.yaml).
+To make urls pretty, see [Routes.yaml](https://github.com/sfi-ru/Flowpack.Listable/blob/master/Configuration/Routes.yaml).

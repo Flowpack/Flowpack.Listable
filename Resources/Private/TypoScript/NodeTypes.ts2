@@ -1,5 +1,5 @@
 # This object is experimental and may not be working yet
-prototype(Sfi.Listable:ListNode) < prototype(Sfi.Listable:List) {
+prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
 	@override.rootNode = ${q(node).property('rootNode') ? q(node).property('rootNode') : documentNode}
 	@override.wrapClass = ${q(node).property('wrapClass')}
 	@override.listTitle = ${q(node).property('listTitle')}
@@ -8,7 +8,7 @@ prototype(Sfi.Listable:ListNode) < prototype(Sfi.Listable:List) {
 	@override.archiveLinkTitle = ${q(node).property('archiveLinkTitle')}
 	@override.archiveLinkClass = ${q(node).property('archiveLinkClass')}
 
-	prototype(Sfi.Listable:Listable) {
+	prototype(Flowpack.Listable:Listable) {
 		@context.listClass = ${q(node).property('listClass')}
 		@context.itemClass = ${q(node).property('itemClass')}
 		@context.sortProperty = ${q(node).property('sortProperty')}
@@ -20,7 +20,7 @@ prototype(Sfi.Listable:ListNode) < prototype(Sfi.Listable:List) {
 
 		collection.getFromRootNode {
 			condition = ${true}
-			renderer = ${q(rootNode).children('[instanceof Sfi.Listable:ListableMixin]').get()}
+			renderer = ${q(rootNode).children('[instanceof Flowpack.Listable:ListableMixin]').get()}
 		}
 	}
 

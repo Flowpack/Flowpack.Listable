@@ -1,5 +1,5 @@
 {
-	"name": "sfi/listable",
+	"name": "flowpack/listable",
 	"type": "typo3-flow-package",
 	"description": "Tiny extension for listing things",
 	"require": {
@@ -7,7 +7,7 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"Sfi\\Listable":"Classes"
+			"Flowpack\\Listable":"Classes"
 		}
 	}
 }

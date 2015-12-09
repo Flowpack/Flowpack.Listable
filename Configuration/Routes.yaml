@@ -5,13 +5,13 @@
 #   uriPattern: '<ListableSubroutes>'
 #   subRoutes:
 #     'ListableSubroutes':
-#       package: 'Sfi.Listable'
+#       package: 'Flowpack.Listable'
 #       variables:
 #         'defaultUriSuffix': ''
 #         'pageSeparator': '-p'
 
 -
-  name: 'Paginate for Sfi.Listable:Listable'
+  name: 'Paginate for Flowpack.Listable:Listable'
   uriPattern:    '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
   defaults:
     '@package':    'TYPO3.Neos'

@@ -1,6 +1,6 @@
 ############# All objects in this file are public API #############
 
-prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
+prototype(Flowpack.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	# These settings are public API:
 	@context.listClass = ${listClass ? listClass : ''}
 	@context.itemClass = ${itemClass ? itemClass : ''}
@@ -25,13 +25,13 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 		class = ${listClass}
 	}
 
-	itemRenderer = Sfi.Listable:ContentCaseShort
+	itemRenderer = Flowpack.Listable:ContentCaseShort
 	itemRenderer.itemRendererByObject {
 		condition = ${itemRenderer != ''}
 		@position = 'start'
 		type = ${itemRenderer}
 	}
-	templatePath = 'resource://Sfi.Listable/Private/Templates/Listable.html'
+	templatePath = 'resource://Flowpack.Listable/Private/Templates/Listable.html'
 	collection = TYPO3.TypoScript:Case {
 		getFromCurrentPage {
 			condition = ${queryType == 'getFromCurrentPage'}
@@ -39,7 +39,7 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 		}
 		getAll {
 			condition = ${true}
-			renderer = ${q(site).find('[instanceof Sfi.Listable:ListableMixin]').get()}
+			renderer = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
 		}
 	}
 	collection.@process.sort = ${q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
@@ -47,7 +47,7 @@ prototype(Sfi.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 }
 
 # This convienince object wraps Listable with title and archive link
-prototype(Sfi.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
+prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	# These settings are public API:
 	@context.wrapClass = ''
 	@context.listTitle = ''

@@ -1,9 +1,8 @@
 <?php
-namespace Sfi\Listable\TypoScript\Eel\FlowQueryOperations;
+namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
 
 /*                                                                        *
- * This script was borrowed from package "Lelesys.News".		          *
- *                                                                        *
+ * This script was inspired by "Lelesys.News" package.                    *
  *                                                                        */
 
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
