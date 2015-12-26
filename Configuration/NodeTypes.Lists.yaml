@@ -41,6 +41,14 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+    itemsPerPage:
+      type: string
+      defaultValue: '24'
+      ui:
+        label: 'Items per page'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
     wrapClass:
       type: string
       defaultValue: ''

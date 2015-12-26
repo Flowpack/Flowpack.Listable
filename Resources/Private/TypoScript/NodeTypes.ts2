@@ -16,7 +16,7 @@ prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
 		@context.limit = ${q(node).property('limit')}
 		@context.itemRenderer = ${q(node).property('itemRenderer')}
 		@context.paginationEnabled = ${q(node).property('paginationEnabled')}
-
+		@context.itemsPerPage = ${q(node).property('itemsPerPage') > 0 ? q(node).property('itemsPerPage') : 24}
 
 		collection.getFromRootNode {
 			condition = ${true}
