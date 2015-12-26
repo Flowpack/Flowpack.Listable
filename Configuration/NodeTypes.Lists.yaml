@@ -33,6 +33,13 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              'DESC':
+                label: 'Descending'
+              'ASC':
+                label: 'Ascending'
     limit:
       type: string
       defaultValue: '10000'
