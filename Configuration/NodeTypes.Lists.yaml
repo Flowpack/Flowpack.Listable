@@ -33,11 +33,26 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+          editor: 'TYPO3.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              'DESC':
+                label: 'Descending'
+              'ASC':
+                label: 'Ascending'
     limit:
       type: string
       defaultValue: '10000'
       ui:
         label: 'Limit'
+        reloadIfChanged: true
+        inspector:
+          group: 'list'
+    itemsPerPage:
+      type: string
+      defaultValue: '24'
+      ui:
+        label: 'Items per page'
         reloadIfChanged: true
         inspector:
           group: 'list'

@@ -13,10 +13,10 @@ prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
 		@context.itemClass = ${q(node).property('itemClass')}
 		@context.sortProperty = ${q(node).property('sortProperty')}
 		@context.sortOrder = ${q(node).property('sortOrder')}
-		@context.limit = ${q(node).property('limit')}
+		@context.limit = ${q(node).property('limit') > 0 ? String.toInteger(q(node).property('limit')) : 10000}
 		@context.itemRenderer = ${q(node).property('itemRenderer')}
 		@context.paginationEnabled = ${q(node).property('paginationEnabled')}
-
+		@context.itemsPerPage = ${q(node).property('itemsPerPage') > 0 ? String.toInteger(q(node).property('itemsPerPage')) : 24}
 
 		collection.getFromRootNode {
 			condition = ${true}
