@@ -46,7 +46,7 @@ You may also override `collection` key with custom query. Sorting and pagination
 ```
 prototype(My.Custom:Object) < prototype(Flowpack.Listable:Listable) {
   @context.limit = 10
-  collection = ${q(site).find('[instanceof Something.Custom:Here]').get()}}
+  collection = ${q(site).find('[instanceof Something.Custom:Here]').get()}
 }
 ```
 
