@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="" product-name="Flowpack.Listable" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="ui.label" xml:space="preserve">
+        <source>List of listable things</source>
+      </trans-unit>
+      <trans-unit id="groups.list" xml:space="preserve">
+        <source>List settings</source>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder" xml:space="preserve">
+        <source>Sort order</source>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder.selectBoxEditor.values.DESC" xml:space="preserve">
+        <source>Descending</source>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder.selectBoxEditor.values.ASC" xml:space="preserve">
+        <source>Ascending</source>
+      </trans-unit>
+      <trans-unit id="properties.paginationEnabled" xml:space="preserve">
+        <source>Enable pagination</source>
+      </trans-unit>
+      <trans-unit id="properties.sortProperty" xml:space="preserve">
+        <source>Sort property</source>
+      </trans-unit>
+      <trans-unit id="properties.limit" xml:space="preserve">
+        <source>Limit</source>
+      </trans-unit>
+      <trans-unit id="properties.itemsPerPage" xml:space="preserve">
+        <source>Items per page</source>
+      </trans-unit>
+      <trans-unit id="properties.wrapClass" xml:space="preserve">
+        <source>Wrap class</source>
+      </trans-unit>
+      <trans-unit id="properties.class" xml:space="preserve">
+        <source>List class</source>
+      </trans-unit>
+      <trans-unit id="properties.itemClass" xml:space="preserve">
+        <source>Item class</source>
+      </trans-unit>
+      <trans-unit id="properties.listTitleClass" xml:space="preserve">
+        <source>List title class</source>
+      </trans-unit>
+      <trans-unit id="properties.listTitle" xml:space="preserve">
+        <source>List title</source>
+      </trans-unit>
+      <trans-unit id="properties.itemRenderer" xml:space="preserve">
+        <source>Item renderer</source>
+      </trans-unit>
+      <trans-unit id="properties.rootNode" xml:space="preserve">
+        <source>Root node</source>
+      </trans-unit>
+      <trans-unit id="properties.archiveLink" xml:space="preserve">
+        <source>Archive link</source>
+      </trans-unit>
+      <trans-unit id="properties.archiveLinkTitle" xml:space="preserve">
+        <source>Archive link title</source>
+      </trans-unit>
+      <trans-unit id="properties.archiveLinkClass" xml:space="preserve">
+        <source>Archive link Class</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
