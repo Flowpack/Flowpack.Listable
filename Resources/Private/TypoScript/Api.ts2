@@ -35,7 +35,7 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 	collection = TYPO3.TypoScript:Case {
 		getFromCurrentPage {
 			condition = ${queryType == 'getFromCurrentPage'}
-			renderer = ${q(documentNode).find('[instanceof Sfi.Listable:ListableMixin]').get()}
+			renderer = ${q(documentNode).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
 		}
 		getAll {
 			condition = ${true}
@@ -56,7 +56,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	@context.archiveLinkTitle = ''
 	@context.archiveLinkClass = ''
 
-	@context.list = Sfi.Listable:Listable
+	@context.list = Flowpack.Listable:Listable
 
 	attributes.class = ${wrapClass}
 	content = TYPO3.TypoScript:Array {
