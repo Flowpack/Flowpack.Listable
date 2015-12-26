@@ -2,18 +2,18 @@
   superTypes:
     - 'TYPO3.Neos:Content'
   ui:
-    label: 'List of listable things'
+    label: 'i18n'
     icon: icon-list
     inlineEditable: true
     inspector:
       groups:
         list:
-          label: 'List settings'
+          label: 'i18n'
   properties:
     paginationEnabled:
       type: boolean
       ui:
-        label: 'Enable pagination'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -21,7 +21,7 @@
       type: string
       defaultValue: 'date'
       ui:
-        label: 'Sort property'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -29,7 +29,7 @@
       type: string
       defaultValue: 'DESC'
       ui:
-        label: 'Sort order'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -37,14 +37,14 @@
           editorOptions:
             values:
               'DESC':
-                label: 'Descending'
+                label: 'i18n'
               'ASC':
-                label: 'Ascending'
+                label: 'i18n'
     limit:
       type: string
       defaultValue: '10000'
       ui:
-        label: 'Limit'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -60,7 +60,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'Wrap class'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -68,7 +68,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'List class'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -76,7 +76,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'Item class'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -84,7 +84,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'List title class'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -92,7 +92,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'List title'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -100,14 +100,14 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'itemRenderer'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
     rootNode:
       type: reference
       ui:
-        label: 'Root node (defaults to current page)'
+        label: 'i18n'
         reloadIfChanged: TRUE
         inspector:
           group: 'list'
@@ -117,7 +117,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'Archive link'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -125,7 +125,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'Archive link title'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'
@@ -133,7 +133,7 @@
       type: string
       defaultValue: ''
       ui:
-        label: 'Archive link class name'
+        label: 'i18n'
         reloadIfChanged: true
         inspector:
           group: 'list'

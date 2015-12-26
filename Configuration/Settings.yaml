@@ -3,3 +3,7 @@ TYPO3:
     typoScript:
       autoInclude:
         Flowpack.Listable: true
+    userInterface:
+      translation:
+        autoInclude:
+          'Flowpack.Listable': ['NodeTypes/*']
