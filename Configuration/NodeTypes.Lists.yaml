@@ -114,13 +114,15 @@
           editorOptions:
             nodeTypes: ['TYPO3.Neos:Document']
     archiveLink:
-      type: string
+      type: reference
       defaultValue: ''
       ui:
         label: 'Archive link'
         reloadIfChanged: true
         inspector:
           group: 'list'
+          editorOptions:
+            nodeTypes: ['TYPO3.Neos:Document']
     archiveLinkTitle:
       type: string
       defaultValue: ''
