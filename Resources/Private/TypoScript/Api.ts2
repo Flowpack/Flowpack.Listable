@@ -42,8 +42,8 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.Neos:Content) {
 			renderer = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
 		}
 	}
-	collection.@process.sort = ${q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
-	collection.@process.slice = ${q(value).count() > 0 ? q(value).slice(String.toInteger(offset), String.toInteger(limit)).get() : value}
+	collection.@process.sort = ${value && q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
+	collection.@process.slice = ${value && q(value).count() > 0 ? q(value).slice(String.toInteger(offset), String.toInteger(limit)).get() : value}
 }
 
 # This convienince object wraps Listable with title and archive link
