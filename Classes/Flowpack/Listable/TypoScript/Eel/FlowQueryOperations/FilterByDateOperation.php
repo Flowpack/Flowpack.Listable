@@ -40,7 +40,7 @@ class FilterByDateOperation extends AbstractOperation
      */
     public function canEvaluate($context)
     {
-        return (isset($context[0]) && ($context[0] instanceof NodeInterface));
+        return (!isset($context[0]) || ($context[0] instanceof NodeInterface));
     }
 
     /**
