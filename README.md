@@ -77,3 +77,29 @@ root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-pagi
 ```
 
 To make urls pretty, see [Routes.yaml](https://github.com/flowpack/Flowpack.Listable/blob/master/Configuration/Routes.yaml).
+
+# Helper FlowQueries you can use
+
+## filterByDate
+
+Filter nodes by properties of type date
+
+## filterByReference
+ 
+Filter nodes by properties of type reference or references
+
+## sort
+ 
+Sort nodes by any property  
+ 
+Example:
+
+    ${q(site).find('[instanceof TYPO3.Neos:Document]').sort('title', ['ASC'|'DESC']).get()}
+
+## sortRecursiveByIndex 
+
+Sort nodes recursively by their sorting property.
+ 
+Example:
+
+    ${q(site).find('[instanceof TYPO3.Neos:Document]').sortRecursiveByIndex(['ASC'|'DESC']).get()}
