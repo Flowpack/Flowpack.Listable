@@ -12,7 +12,7 @@ use TYPO3\TYPO3CR\Domain\Model\Node;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
 /**
- * EEL sort() operation to sort Nodes
+ * FlowQuery operation to filter Nodes by a date property
  */
 class FilterByDateOperation extends AbstractOperation
 {
