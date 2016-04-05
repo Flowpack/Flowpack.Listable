@@ -8,9 +8,9 @@
 			<f:if condition="{pagination}">
 				<typo3cr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{pagination}">
 					<ul{attributes -> f:format.raw()} >
-						<f:for each="{paginatedItems}" as="item">
+						<f:for each="{paginatedItems}" as="item" iteration="iterator">
 							<li class="{itemClass}">
-								<ts:render path="itemRenderer" context="{node: item}" />
+								<ts:render path="itemRenderer" context="{node: item, iterator: iterator}" />
 							</li>
 						</f:for>
 					</ul>
@@ -19,9 +19,9 @@
 		</f:then>
 		<f:else>
 			<ul{attributes -> f:format.raw()}>
-				<f:for each="{collection}" as="item">
+				<f:for each="{collection}" as="item" iteration="iterator">
 					<li class="{itemClass}">
-						<ts:render path="itemRenderer" context="{node: item}" />
+						<ts:render path="itemRenderer" context="{node: item, iterator: iterator}" />
 					</li>
 				</f:for>
 			</ul>
