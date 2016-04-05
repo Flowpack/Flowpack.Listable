@@ -39,7 +39,7 @@ At the heart of this package is a `Flowpack.Listable:Listable` object. It provid
 | itemsPerPage | Number of items per page when using pagination | 24 |
 | maximumNumberOfLinks | Number of page links in pagination | 15 |
 | queryType | Predefined query types, choose between `getFromCurrentPage` and `getAll` | 'getAll' |
-| itemRenderer | Object used for rendering child items | 'Flowpack.Listable:ContentCaseShort' |
+| itemRenderer | Object used for rendering child items. Within it you get two context vars set: `node` and `iterator` | 'Flowpack.Listable:ContentCaseShort' |
 
 You may also override `collection` key with custom query. Sorting and pagination would still apply (via `@process`). Here's an example that lists first 10 objects of type `Something.Custom:Here`.
 
