@@ -1,6 +1,6 @@
 ############# All objects in this file are public API #############
 
-prototype(Flowpack.Listable:Listable) < prototype(TYPO3.Neos:Content) {
+prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 	# These settings are public API:
 	@context.listClass = ${listClass ? listClass : ''}
 	@context.itemClass = ${itemClass ? itemClass : ''}
