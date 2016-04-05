@@ -58,7 +58,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 
 	@context.list = Flowpack.Listable:Listable
 	# Don't render the List object if the list is empty
-	@if.listNotEmpty = ${list.collection != null}
+	@if.listNotEmpty = ${list != null}
 
 	attributes.class = ${wrapClass}
 	content = TYPO3.TypoScript:Array {
