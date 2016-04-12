@@ -61,11 +61,12 @@ but use `Flowpack.Listable:Listable` directly.
 | Setting | Description | Defaults |
 |---------|-------------|----------|
 | wrapClass | Class of a div that wraps the whole object | '' |
-| listTitle | Test of a title | '' |
-| listTitleClass | Class of a list title | '' |
-| archiveLink | Nodepath for archive link | '' |
-| archiveLinkTitle | Title of an archive link | '' |
-| archiveLinkClass | Classname of an archive link | '' |
+| listTitle | Test of the title | '' |
+| listTitleClass | Class of the list title | '' |
+| archiveLink | Nodepath for the archive link | '' |
+| archiveLinkTitle | Title of the archive link | '' |
+| archiveLinkClass | Classname of the archive link | '' |
+| archiveLinkAdditionalParams | AdditionalParams of the archive link, e.g. `@context.archiveLinkAdditionalParams = ${{archive: 1}}` | {} |
 
 # Configuring pagination
 
@@ -85,21 +86,21 @@ To make urls pretty, see [Routes.yaml](https://github.com/flowpack/Flowpack.List
 Filter nodes by properties of type date
 
 ## filterByReference
- 
+
 Filter nodes by properties of type reference or references
 
 ## sort
- 
+
 Sort nodes by any property  
- 
+
 Example:
 
     ${q(site).find('[instanceof TYPO3.Neos:Document]').sort('title', ['ASC'|'DESC']).get()}
 
-## sortRecursiveByIndex 
+## sortRecursiveByIndex
 
 Sort nodes recursively by their sorting property.
- 
+
 Example:
 
     ${q(site).find('[instanceof TYPO3.Neos:Document]').sortRecursiveByIndex(['ASC'|'DESC']).get()}

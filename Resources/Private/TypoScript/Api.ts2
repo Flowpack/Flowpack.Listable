@@ -55,6 +55,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	@context.archiveLink = ''
 	@context.archiveLinkTitle = ''
 	@context.archiveLinkClass = ''
+	@context.archiveLinkAdditionalParams = ${{}}
 
 	@context.list = Flowpack.Listable:Listable
 	# Don't render the List object if the list is empty
@@ -74,6 +75,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 			attributes.class = ${archiveLinkClass}
 			attributes.href = TYPO3.Neos:NodeUri {
 				node = ${archiveLink}
+				additionalParams = ${archiveLinkAdditionalParams}
 			}
 			content = ${archiveLinkTitle}
 			@if.isSet = ${archiveLink != ''}
