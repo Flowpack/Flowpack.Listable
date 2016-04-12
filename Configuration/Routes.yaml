@@ -8,7 +8,7 @@
 #       package: 'Flowpack.Listable'
 #       variables:
 #         'defaultUriSuffix': ''
-#         'pageSeparator': '-p'
+#         'pageSeparator': '~p'
 
 -
   name: 'Paginate for Flowpack.Listable:Listable'
