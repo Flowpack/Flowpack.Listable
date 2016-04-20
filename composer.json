@@ -5,6 +5,7 @@
 	},
 	"type": "typo3-flow-package",
 	"description": "Tiny extension for listing things",
+	"license": "MIT",
 	"require": {
 		"typo3/neos": "*"
 	},
