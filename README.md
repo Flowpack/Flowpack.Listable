@@ -31,7 +31,7 @@ At the heart of this package is a `Flowpack.Listable:Listable` object. It provid
 |---------|-------------|----------|
 | listClass | Classname of UL tag | '' |
 | itemClass | Classname of LI tag of wrapping each item | '' |
-| sortProperty | Sort by property | 'date' |
+| sortProperty | Sort by property | '' |
 | sortOrder | Sort order | 'DESC' |
 | limit | Limit number of results. Set to high number when using with pagination | 10000 |
 | offset | Offset results by some value (i.e. skip a number of first records) | 0 |

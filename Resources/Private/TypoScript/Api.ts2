@@ -5,7 +5,7 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 	@context.listClass = ${listClass ? listClass : ''}
 	@context.itemClass = ${itemClass ? itemClass : ''}
 	@context.queryType = ${queryType ? queryType : ''}
-	@context.sortProperty = 'date'
+	@context.sortProperty = ''
 	@context.sortOrder = 'DESC'
 	@context.limit = 10000
 	@context.offset = 0
@@ -23,6 +23,7 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 
 	attributes = TYPO3.TypoScript:Attributes {
 		class = ${listClass}
+		class.@if.isSet = ${listClass ? true : false}
 	}
 
 	itemRenderer = Flowpack.Listable:ContentCaseShort
@@ -66,6 +67,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 		listTitleTag = TYPO3.TypoScript:Tag {
 			tagName = 'h2'
 			attributes.class = ${listTitleClass}
+			attributes.class.@if.isSet = ${listTitleClass ? true : false}
 			content = ${listTitle}
 			@if.isSet = ${!String.isBlank(listTitle) && !String.isBlank(list)}
 		}
