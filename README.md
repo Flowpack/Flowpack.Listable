@@ -92,7 +92,8 @@ Filter nodes by properties of type reference or references
 ## sort
 
 Sort nodes by any property.
-Neos doesn't have built-in sort FlowQuery operation (originally due to performance considerations). To quickly sort large amounts of nodes simple in-memory sorting won't perform well, and proper indexed search would do a better job. But if you have not too many nodes (~<10000), plain in-memory sorting may be a simplier choice, especially for cached views, so give it a try, before investing into more complex solutions.
+
+Neos doesn't have built-in sort FlowQuery operation (originally due to performance considerations). Sorting large amounts of nodes simple in-memory sorting won't perform well, and [a proper indexed search](https://github.com/Flowpack/Flowpack.ElasticSearch) would always do a better job. But if you have not too many nodes (~<10000) plain in-memory sorting may be a decent choice, especially for cached views. So give it a try before investing into more complex solutions.
 
 Example:
 
