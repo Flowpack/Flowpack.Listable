@@ -1,86 +1,90 @@
 ############# All objects in this file are public API #############
 
 prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
-	# These settings are public API:
-	@context.listClass = ${listClass ? listClass : ''}
-	@context.itemClass = ${itemClass ? itemClass : ''}
-	@context.queryType = ${queryType ? queryType : ''}
-	@context.sortProperty = ''
-	@context.sortOrder = 'DESC'
-	@context.limit = 10000
-	@context.offset = 0
-	@context.itemRenderer = ${itemRenderer ? itemRenderer : ''}
-	@context.paginationEnabled = ${paginationEnabled ? paginationEnabled : true}
-	@context.itemsPerPage = ${itemsPerPage ? itemsPerPage : 24}
-	@context.maximumNumberOfLinks = ${maximumNumberOfLinks ? maximumNumberOfLinks : 15}
+    # These settings are public API:
+    @context.listClass = ${listClass ? listClass : ''}
+    @context.itemClass = ${itemClass ? itemClass : ''}
+    @context.queryType = ${queryType ? queryType : ''}
+    @context.sortProperty = ''
+    @context.sortOrder = 'DESC'
+    @context.limit = 10000
+    @context.offset = 0
+    @context.itemRenderer = ${itemRenderer ? itemRenderer : ''}
+    @context.paginationEnabled = ${paginationEnabled ? paginationEnabled : true}
+    @context.paginationInsertAbove = ${paginationInsertAbove ? paginationInsertAbove : false}
+    @context.paginationInsertBelow = ${paginationInsertBelow ? paginationInsertBelow : true}
+    @context.itemsPerPage = ${itemsPerPage ? itemsPerPage : 24}
+    @context.maximumNumberOfLinks = ${maximumNumberOfLinks ? maximumNumberOfLinks : 15}
 
-	itemClass = ${itemClass}
-	paginationEnabled = ${paginationEnabled}
-	pagination = TYPO3.TypoScript:RawArray {
-		itemsPerPage = ${itemsPerPage}
-		maximumNumberOfLinks = ${maximumNumberOfLinks}
-	}
+    itemClass = ${itemClass}
+    paginationEnabled = ${paginationEnabled}
+    pagination = TYPO3.TypoScript:RawArray {
+        itemsPerPage = ${itemsPerPage}
+        maximumNumberOfLinks = ${maximumNumberOfLinks}
+        insertAbove = ${paginationInsertAbove}
+        insertBelow = ${paginationInsertBelow}
+    }
 
-	attributes = TYPO3.TypoScript:Attributes {
-		class = ${listClass}
-		class.@if.isSet = ${listClass ? true : false}
-	}
+    attributes = TYPO3.TypoScript:Attributes {
+        class = ${listClass}
+        class.@if.isSet = ${listClass ? true : false}
+    }
 
-	itemRenderer = Flowpack.Listable:ContentCaseShort
-	itemRenderer.itemRendererByObject {
-		condition = ${itemRenderer != ''}
-		@position = 'start'
-		type = ${itemRenderer}
-	}
-	templatePath = 'resource://Flowpack.Listable/Private/Templates/Listable.html'
-	collection = TYPO3.TypoScript:Case {
-		getFromCurrentPage {
-			condition = ${queryType == 'getFromCurrentPage'}
-			renderer = ${q(documentNode).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
-		}
-		getAll {
-			condition = ${true}
-			renderer = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
-		}
-	}
-	collection.@process.sort = ${value && q(value).count() > 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
-	collection.@process.slice = ${value && q(value).count() > 0 ? q(value).slice(String.toInteger(offset), String.toInteger(limit)).get() : value}
+    itemRenderer = Flowpack.Listable:ContentCaseShort
+    itemRenderer.itemRendererByObject {
+        condition = ${itemRenderer != ''}
+        @position = 'start'
+        type = ${itemRenderer}
+    }
+    templatePath = 'resource://Flowpack.Listable/Private/Templates/Listable.html'
+    collection = TYPO3.TypoScript:Case {
+        getFromCurrentPage {
+            condition = ${queryType == 'getFromCurrentPage'}
+            renderer = ${q(documentNode).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
+        }
+        getAll {
+            condition = ${true}
+            renderer = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
+        }
+    }
+    collection.@process.sort = ${value && q(value).count()> 0 && sortProperty ? q(value).sort(sortProperty, sortOrder).get() : value}
+    collection.@process.slice = ${value && q(value).count()> 0 ? q(value).slice(String.toInteger(offset), String.toInteger(limit)).get() : value}
 }
 
-# This convienince object wraps Listable with title and archive link
+# This convenience object wraps Listable with title and archive link
 prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
-	# These settings are public API:
-	@context.wrapClass = ''
-	@context.listTitle = ''
-	@context.listTitleClass = ''
-	@context.archiveLink = ''
-	@context.archiveLinkTitle = ''
-	@context.archiveLinkClass = ''
-	@context.archiveLinkAdditionalParams = ${{}}
+# These settings are public API:
+@context.wrapClass = ''
+@context.listTitle = ''
+@context.listTitleClass = ''
+@context.archiveLink = ''
+@context.archiveLinkTitle = ''
+@context.archiveLinkClass = ''
+@context.archiveLinkAdditionalParams = ${{}}
 
-	@context.list = Flowpack.Listable:Listable
-	# Don't render the List object if the list is empty
-	@if.listNotEmpty = ${list != null}
+@context.list = Flowpack.Listable:Listable
+# Don't render the List object if the list is empty
+@if.listNotEmpty = ${list != null}
 
-	attributes.class = ${wrapClass}
-	content = TYPO3.TypoScript:Array {
-		listTitleTag = TYPO3.TypoScript:Tag {
-			tagName = 'h2'
-			attributes.class = ${listTitleClass}
-			attributes.class.@if.isSet = ${listTitleClass ? true : false}
-			content = ${listTitle}
-			@if.isSet = ${!String.isBlank(listTitle) && !String.isBlank(list)}
-		}
-		list = ${list}
-		archiveLink = TYPO3.TypoScript:Tag {
-			tagName = 'a'
-			attributes.class = ${archiveLinkClass}
-			attributes.href = TYPO3.Neos:NodeUri {
-				node = ${archiveLink}
-				additionalParams = ${archiveLinkAdditionalParams}
-			}
-			content = ${archiveLinkTitle}
-			@if.isSet = ${archiveLink != ''}
-		}
-	}
+attributes.class = ${wrapClass}
+content = TYPO3.TypoScript:Array {
+listTitleTag = TYPO3.TypoScript:Tag {
+tagName = 'h2'
+attributes.class = ${listTitleClass}
+attributes.class.@if.isSet = ${listTitleClass ? true : false}
+content = ${listTitle}
+@if.isSet = ${!String.isBlank(listTitle)&& !String.isBlank(list)}
+}
+list = ${list}
+archiveLink = TYPO3.TypoScript:Tag {
+tagName = 'a'
+attributes.class = ${archiveLinkClass}
+attributes.href = TYPO3.Neos:NodeUri {
+node = ${archiveLink}
+additionalParams = ${archiveLinkAdditionalParams}
+}
+content = ${archiveLinkTitle}
+@if.isSet = ${archiveLink != ''}
+        }
+    }
 }
