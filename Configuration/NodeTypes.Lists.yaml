@@ -17,6 +17,14 @@
         reloadIfChanged: true
         inspector:
           group: 'list'
+    paginationInsertAbove:
+      type: boolean
+      ui:
+        label: 'i18n'
+    paginationInsertBelow:
+      type: boolean
+      ui:
+        label: 'i18n'
     sortProperty:
       type: string
       defaultValue: 'date'
