@@ -5,7 +5,7 @@ namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
  * This script belongs to the Flow package "Flowpack.Listable".           *
  *                                                                        */
 
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 use TYPO3\Eel\FlowQuery\FlowQuery;
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;

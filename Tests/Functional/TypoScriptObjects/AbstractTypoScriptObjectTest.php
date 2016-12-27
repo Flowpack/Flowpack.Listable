@@ -1,17 +1,17 @@
 <?php
 namespace Flowpack\Listable\Tests\Functional\TypoScriptObjects;
 
-use TYPO3\Flow\Http\Request;
-use TYPO3\Flow\Http\Response;
-use TYPO3\Flow\Mvc\Controller\Arguments;
-use TYPO3\Flow\Mvc\Controller\ControllerContext;
-use TYPO3\Flow\Mvc\Routing\UriBuilder;
+use Neos\Flow\Http\Request;
+use Neos\Flow\Http\Response;
+use Neos\Flow\Mvc\Controller\Arguments;
+use Neos\Flow\Mvc\Controller\ControllerContext;
+use Neos\Flow\Mvc\Routing\UriBuilder;
 
 /**
  * Testcase for the TypoScript View
  *
  */
-abstract class AbstractTypoScriptObjectTest extends \TYPO3\Flow\Tests\FunctionalTestCase
+abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalTestCase
 {
     /**
      * @var ControllerContext

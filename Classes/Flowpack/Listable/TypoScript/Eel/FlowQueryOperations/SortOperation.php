@@ -8,7 +8,7 @@ namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
 
 use TYPO3\Eel\FlowQuery\Operations\AbstractOperation;
 use TYPO3\Eel\FlowQuery\FlowQuery;
-use TYPO3\Flow\Annotations as Flow;
+use Neos\Flow\Annotations as Flow;
 use TYPO3\TYPO3CR\Domain\Model\Node;
 use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
 
@@ -69,7 +69,7 @@ class SortOperation extends AbstractOperation
             /** @var Node $node  */
             foreach ($nodes as $node) {
                 if ($sortByPropertyPath[0] === '_') {
-                    $propertyValue = \TYPO3\Flow\Reflection\ObjectAccess::getPropertyPath($node, substr($sortByPropertyPath, 1));
+                    $propertyValue = \Neos\Flow\Reflection\ObjectAccess::getPropertyPath($node, substr($sortByPropertyPath, 1));
                 } else {
                     $propertyValue = $node->getProperty($sortByPropertyPath);
                 }
