@@ -75,7 +75,7 @@ prototype(Flowpack.Listable:List) < prototype(Neos.Fusion:Tag) {
 		archiveLink = Neos.Fusion:Tag {
 			tagName = 'a'
 			attributes.class = ${archiveLinkClass}
-			attributes.href = TYPO3.Neos:NodeUri {
+			attributes.href = Neos.Neos:NodeUri {
 				node = ${archiveLink}
 				additionalParams = ${archiveLinkAdditionalParams}
 			}

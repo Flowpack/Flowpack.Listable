@@ -1,5 +1,5 @@
 # This object is used to render items in a list automatically with object of type ObjectType + Short
-prototype(Flowpack.Listable:ContentCaseShort) < prototype(TYPO3.Neos:ContentCase) {
+prototype(Flowpack.Listable:ContentCaseShort) < prototype(Neos.Neos:ContentCase) {
 	default {
 		@position = 'end'
 		condition = TRUE

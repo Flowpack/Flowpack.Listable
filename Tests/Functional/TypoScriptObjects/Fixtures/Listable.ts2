@@ -1,5 +1,5 @@
 include: resource://Neos.Fusion/Private/TypoScript/Root.ts2
-include: resource://TYPO3.Neos/Private/TypoScript/Root.ts2
+include: resource://Neos.Neos/Private/TypoScript/Root.ts2
 include: resource://Flowpack.Listable/Private/TypoScript/Root.ts2
 
 listable.basicListing = Flowpack.Listable:Listable {
