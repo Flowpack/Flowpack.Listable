@@ -1,6 +1,6 @@
 # Listable
 
-This Neos package solves one problem: help you list any nodes in TypoScript.
+This Neos package solves one problem: help you list any nodes in Fusion.
 The idea is very simple: you often need to display list of things (e.g. news, articles etc), and the concern of listing items should better be separated from the concern of rendering items. This packages provides a solid foundation for listing, while allowing you to take care of rendering stuff on your own.
 
 # TL;DR
@@ -11,21 +11,19 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 3. For each of your nodetypes create a new TS object of type NodeTypeName + 'Short', or manually definy a rendering object.
 4. Rely on public API keys when overriding settings.
 
-[See here](https://github.com/sfi-ru/KateheoDistr/blob/master/Packages/Sites/Sfi.Kateheo/Resources/Private/TypoScript/NodeTypes/PageMain.ts2#L5) for a trivial integration example.
-
-If you don't need the package, but love TypoScript, [look here](https://github.com/Flowpack/Flowpack.Listable/blob/master/Resources/Private/TypoScript/Api.ts2), you may find some inspiration :)
+If you don't need the package, but love Fusion, [look here](https://github.com/Flowpack/Flowpack.Listable/blob/master/Resources/Private/Fusion/Api.ts2), you may find some inspiration :)
 
 # Nodetype mixins
 
 On data level we provide only one mixin: `Flowpack.Listable:ListableMixin`. The only thing you have to do, is to add this mixin to nodetypes that you would want to list with this package. That's right, planing all other fields is completely up to you.
 
-# TypoScript objects
+# Fusion objects
 
 Keys documented here are considered public API and would be treated with semantic versioning in mind. Extend all other properties at your own risk.
 
 ## Flowpack.Listable:Listable
 
-At the heart of this package is a `Flowpack.Listable:Listable` object. It provides some good defaults for rendering lists of things, and is pretty extensible too. Here are TypoScript context variables that you can configure for this object:
+At the heart of this package is a `Flowpack.Listable:Listable` object. It provides some good defaults for rendering lists of things, and is pretty extensible too. Here are Fusion context variables that you can configure for this object:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
@@ -73,7 +71,7 @@ but use `Flowpack.Listable:Listable` directly.
 Besides enabling pagination in TS object, you must not forget about adding pagination entryIdentifier to all parent cache objects, e.g. like this:
 
 ```
-prototype(TYPO3.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+prototype(Neos.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
 ```
 
@@ -97,7 +95,7 @@ Neos doesn't have built-in sort FlowQuery operation (originally due to performan
 
 Example:
 
-    ${q(site).find('[instanceof TYPO3.Neos:Document]').sort('title', ['ASC'|'DESC']).get()}
+    ${q(site).find('[instanceof Neos.Neos:Document]').sort('title', ['ASC'|'DESC']).get()}
 
 ## sortRecursiveByIndex
 
@@ -105,4 +103,4 @@ Sort nodes recursively by their sorting property.
 
 Example:
 
-    ${q(site).find('[instanceof TYPO3.Neos:Document]').sortRecursiveByIndex(['ASC'|'DESC']).get()}
+    ${q(site).find('[instanceof Neos.Neos:Document]').sortRecursiveByIndex(['ASC'|'DESC']).get()}

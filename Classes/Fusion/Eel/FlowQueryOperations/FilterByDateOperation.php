@@ -1,5 +1,5 @@
 <?php
-namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
+namespace Flowpack\Listable\Fusion\Eel\FlowQueryOperations;
 
 /*                                                                        *
  * This script belongs to the Flow package "Flowpack.Listable".           *
@@ -33,7 +33,7 @@ class FilterByDateOperation extends AbstractOperation
     /**
      * {@inheritdoc}
      *
-     * We can only handle TYPO3CR Nodes.
+     * We can only handle CR Nodes.
      *
      * @param mixed $context
      * @return boolean

@@ -1,24 +1,24 @@
 {namespace neos=Neos\Neos\ViewHelpers}
-{namespace typo3cr=Neos\ContentRepository\ViewHelpers}
-{namespace ts=Neos\Fusion\ViewHelpers}
+{namespace neoscr=Neos\ContentRepository\ViewHelpers}
+{namespace fs=Neos\Fusion\ViewHelpers}
 
 <f:if condition="{collection}">
 	<f:if condition="{paginationEnabled}">
 		<f:then>
 			<f:if condition="{pagination}">
-				<typo3cr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{pagination}">
+				<neoscr:widget.paginate nodes="{collection}" as="paginatedItems" widgetId="listable-paginate" configuration="{pagination}">
 					<ul{attributes -> f:format.raw()} >
 						<f:for each="{paginatedItems}" as="item" iteration="iterator">
-							<li {f:if(condition: itemClass, then: 'class="{itemClass}"')}><ts:render path="itemRenderer" context="{node: item, iterator: iterator}" /></li>
+							<li {f:if(condition: itemClass, then: 'class="{itemClass}"')}><fs:render path="itemRenderer" context="{node: item, iterator: iterator}" /></li>
 						</f:for>
 					</ul>
-				</typo3cr:widget.paginate>
+				</neoscr:widget.paginate>
 			</f:if>
 		</f:then>
 		<f:else>
 			<ul{attributes -> f:format.raw()}>
 				<f:for each="{collection}" as="item" iteration="iterator">
-					<li class="{itemClass}"><ts:render path="itemRenderer" context="{node: item, iterator: iterator}" /></li>
+					<li class="{itemClass}"><fs:render path="itemRenderer" context="{node: item, iterator: iterator}" /></li>
 				</f:for>
 			</ul>
 		</f:else>
