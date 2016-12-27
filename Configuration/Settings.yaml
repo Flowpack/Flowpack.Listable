@@ -1,11 +1,11 @@
 
 Neos:
   Neos:
-    typoScript:
-      autoInclude:
-        Flowpack.Listable: true
     userInterface:
       translation:
         autoInclude:
           Flowpack.Listable:
             - 'NodeTypes/*'
+    fusion:
+      autoInclude:
+        Flowpack.Listable: true
