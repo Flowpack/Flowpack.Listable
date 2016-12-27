@@ -1,7 +1,7 @@
 <?php
 namespace Flowpack\Listable\Tests\Functional\TypoScriptObjects;
 
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Flowpack\Listable\Tests\Functional\TypoScriptObjects\AbstractTypoScriptObjectTest;
 
 /**

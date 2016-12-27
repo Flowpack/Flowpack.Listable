@@ -9,8 +9,8 @@ namespace Flowpack\Listable\TypoScript\Eel\FlowQueryOperations;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
-use TYPO3\TYPO3CR\Domain\Model\Node;
-use TYPO3\TYPO3CR\Domain\Model\NodeInterface;
+use Neos\ContentRepository\Domain\Model\Node;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
  * FlowQuery operation to sort Nodes by a property
