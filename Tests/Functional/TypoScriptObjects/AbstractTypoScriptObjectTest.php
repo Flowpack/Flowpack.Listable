@@ -21,11 +21,11 @@ abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalT
     /**
      * Helper to build a TypoScript view object
      *
-     * @return \Neos\Fusion\View\TypoScriptView
+     * @return \Neos\Fusion\View\FusionView
      */
     protected function buildView()
     {
-        $view = new \Neos\Fusion\View\TypoScriptView();
+        $view = new \Neos\Fusion\View\FusionView();
 
         $httpRequest = Request::createFromEnvironment();
         $request = $httpRequest->createActionRequest();
@@ -43,7 +43,7 @@ abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalT
         $view->setControllerContext($this->controllerContext);
         $view->disableFallbackView();
         $view->setPackageKey('Flowpack.Listable');
-        $view->setTypoScriptPathPattern(__DIR__ . '/Fixtures/');
+        $view->setFusionPathPattern(__DIR__ . '/Fixtures/');
 
         return $view;
     }

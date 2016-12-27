@@ -20,7 +20,7 @@ class ListableTest extends AbstractTypoScriptObjectTest
         $newNode2->method('getProperties')->willReturn(array('title' => 'Another hello world!'));
 
         $view = $this->buildView();
-        $view->setTypoScriptPath('listable/basicListing');
+        $view->setFusionPath('listable/basicListing');
         $view->assign('collection', array($newNode1, $newNode2));
         $this->assertXmlStringEqualsXmlString(
           '<ul>
