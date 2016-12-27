@@ -1,6 +1,6 @@
 ############# All objects in this file are public API #############
 
-prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
+prototype(Flowpack.Listable:Listable) < prototype(Neos.Fusion:Template) {
 	# These settings are public API:
 	@context.listClass = ${listClass ? listClass : ''}
 	@context.itemClass = ${itemClass ? itemClass : ''}
@@ -16,12 +16,12 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 
 	itemClass = ${itemClass}
 	paginationEnabled = ${paginationEnabled}
-	pagination = TYPO3.TypoScript:RawArray {
+	pagination = Neos.Fusion:RawArray {
 		itemsPerPage = ${itemsPerPage}
 		maximumNumberOfLinks = ${maximumNumberOfLinks}
 	}
 
-	attributes = TYPO3.TypoScript:Attributes {
+	attributes = Neos.Fusion:Attributes {
 		class = ${listClass}
 		class.@if.isSet = ${listClass ? true : false}
 	}
@@ -33,7 +33,7 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 		type = ${itemRenderer}
 	}
 	templatePath = 'resource://Flowpack.Listable/Private/Templates/Listable.html'
-	collection = TYPO3.TypoScript:Case {
+	collection = Neos.Fusion:Case {
 		getFromCurrentPage {
 			condition = ${queryType == 'getFromCurrentPage'}
 			renderer = ${q(documentNode).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
@@ -48,7 +48,7 @@ prototype(Flowpack.Listable:Listable) < prototype(TYPO3.TypoScript:Template) {
 }
 
 # This convienince object wraps Listable with title and archive link
-prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
+prototype(Flowpack.Listable:List) < prototype(Neos.Fusion:Tag) {
 	# These settings are public API:
 	@context.wrapClass = ''
 	@context.listTitle = ''
@@ -63,8 +63,8 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 	@if.listNotEmpty = ${list != null}
 
 	attributes.class = ${wrapClass}
-	content = TYPO3.TypoScript:Array {
-		listTitleTag = TYPO3.TypoScript:Tag {
+	content = Neos.Fusion:Array {
+		listTitleTag = Neos.Fusion:Tag {
 			tagName = 'h2'
 			attributes.class = ${listTitleClass}
 			attributes.class.@if.isSet = ${listTitleClass ? true : false}
@@ -72,7 +72,7 @@ prototype(Flowpack.Listable:List) < prototype(TYPO3.TypoScript:Tag) {
 			@if.isSet = ${!String.isBlank(listTitle) && !String.isBlank(list)}
 		}
 		list = ${list}
-		archiveLink = TYPO3.TypoScript:Tag {
+		archiveLink = Neos.Fusion:Tag {
 			tagName = 'a'
 			attributes.class = ${archiveLinkClass}
 			attributes.href = TYPO3.Neos:NodeUri {
