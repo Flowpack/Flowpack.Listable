@@ -1,17 +1,22 @@
 {
-	"name": "flowpack/listable",
-	"replace": {
-		"sfi/listable":"v0.1"
-	},
-	"type": "typo3-flow-package",
-	"description": "Tiny extension for listing things",
-	"license": "MIT",
-	"require": {
-		"typo3/neos": "*"
-	},
-	"autoload": {
-		"psr-0": {
-			"Flowpack\\Listable":"Classes"
-		}
-	}
+    "name": "flowpack/listable",
+    "replace": {
+        "sfi/listable": "v0.1"
+    },
+    "type": "typo3-flow-package",
+    "description": "Tiny extension for listing things",
+    "license": "MIT",
+    "require": {
+        "typo3/neos": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Flowpack\\Listable": "Classes"
+        }
+    },
+    "extra": {
+        "applied-flow-migrations": [
+            "TYPO3.FLOW3-201201261636"
+        ]
+    }
 }
