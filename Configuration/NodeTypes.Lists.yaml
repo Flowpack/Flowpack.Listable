@@ -1,7 +1,7 @@
 
 'Flowpack.Listable:ListNode':
   superTypes:
-    'TYPO3.Neos:Content': '1'
+    'TYPO3.Neos:Content': true
   ui:
     label: i18n
     icon: icon-list
