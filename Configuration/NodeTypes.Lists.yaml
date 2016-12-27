@@ -1,7 +1,7 @@
 
 'Flowpack.Listable:ListNode':
   superTypes:
-    'TYPO3.Neos:Content': true
+    'Neos.Neos:Content': true
   ui:
     label: i18n
     icon: icon-list
@@ -34,7 +34,7 @@
         reloadIfChanged: true
         inspector:
           group: list
-          editor: TYPO3.Neos/Inspector/Editors/SelectBoxEditor
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
           editorOptions:
             values:
               DESC:
@@ -114,7 +114,7 @@
           group: list
           editorOptions:
             nodeTypes:
-              - 'TYPO3.Neos:Document'
+              - 'Neos.Neos:Document'
     archiveLink:
       type: reference
       defaultValue: ''
@@ -125,7 +125,7 @@
           group: list
           editorOptions:
             nodeTypes:
-              - 'TYPO3.Neos:Document'
+              - 'Neos.Neos:Document'
     archiveLinkTitle:
       type: string
       defaultValue: ''

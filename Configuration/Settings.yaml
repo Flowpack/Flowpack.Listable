@@ -1,4 +1,5 @@
-TYPO3:
+
+Neos:
   Neos:
     typoScript:
       autoInclude:
@@ -6,4 +7,5 @@ TYPO3:
     userInterface:
       translation:
         autoInclude:
-          'Flowpack.Listable': ['NodeTypes/*']
+          Flowpack.Listable:
+            - 'NodeTypes/*'

@@ -14,7 +14,7 @@
   name: 'Paginate for Flowpack.Listable:Listable'
   uriPattern:    '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
   defaults:
-    '@package':    'TYPO3.Neos'
+    '@package':    'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format':     'html'
     '@action':     'show'
@@ -26,5 +26,5 @@
       'currentPage': '1'
   routeParts:
     node:
-      handler: TYPO3\Neos\Routing\FrontendNodeRoutePartHandler
+      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler
   appendExceedingArguments: TRUE
