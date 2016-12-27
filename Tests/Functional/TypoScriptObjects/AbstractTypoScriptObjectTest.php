@@ -21,11 +21,11 @@ abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalT
     /**
      * Helper to build a TypoScript view object
      *
-     * @return \TYPO3\TypoScript\View\TypoScriptView
+     * @return \Neos\Fusion\View\TypoScriptView
      */
     protected function buildView()
     {
-        $view = new \TYPO3\TypoScript\View\TypoScriptView();
+        $view = new \Neos\Fusion\View\TypoScriptView();
 
         $httpRequest = Request::createFromEnvironment();
         $request = $httpRequest->createActionRequest();
