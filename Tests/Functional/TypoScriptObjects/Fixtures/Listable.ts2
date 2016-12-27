@@ -1,6 +1,6 @@
-include: resource://Neos.Fusion/Private/TypoScript/Root.ts2
-include: resource://Neos.Neos/Private/TypoScript/Root.ts2
-include: resource://Flowpack.Listable/Private/TypoScript/Root.ts2
+include: resource://Neos.Fusion/Private/Fusion/Root.ts2
+include: resource://Neos.Neos/Private/Fusion/Root.ts2
+include: resource://Flowpack.Listable/Private/Fusion/Root.ts2
 
 listable.basicListing = Flowpack.Listable:Listable {
 	itemRenderer = ${node.properties.title}
