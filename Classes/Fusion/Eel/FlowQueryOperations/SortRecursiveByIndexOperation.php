@@ -21,15 +21,11 @@ class SortRecursiveByIndexOperation extends AbstractOperation
 {
     /**
      * {@inheritdoc}
-     *
-     * @var string
      */
     protected static $shortName = 'sortRecursiveByIndex';
 
     /**
      * {@inheritdoc}
-     *
-     * @var int
      */
     protected static $priority = 100;
 
@@ -37,10 +33,6 @@ class SortRecursiveByIndexOperation extends AbstractOperation
      * {@inheritdoc}
      *
      * We can only handle CR Nodes.
-     *
-     * @param mixed $context
-     *
-     * @return bool
      */
     public function canEvaluate($context)
     {
@@ -50,35 +42,32 @@ class SortRecursiveByIndexOperation extends AbstractOperation
     /**
      * {@inheritdoc}
      *
-     * @param FlowQuery $flowQuery the FlowQuery object
-     * @param array     $arguments the arguments for this operation
-     *
-     * @return mixed
+     * @return void
      */
     public function evaluate(FlowQuery $flowQuery, array $arguments)
     {
-        $nodes = $flowQuery->getContext();
-
         $sortOrder = 'ASC';
-        if (isset($arguments[0]) && !empty($arguments[0]) && in_array($arguments[0], array('ASC', 'DESC'))) {
+        if (!empty($arguments[0]) && in_array($arguments[0], ['ASC', 'DESC'], true)) {
             $sortOrder = $arguments[0];
         }
 
         $indexPathCache = [];
 
         /** @var NodeInterface $node */
-        foreach ($nodes as $node) {
+        foreach ($flowQuery->getContext() as $node) {
             // Collect the list of sorting indices for all parents of the node and the node itself
             $nodeIdentifier = $node->getIdentifier();
-            $indexPath = array($node->getIndex());
+            $indexPath = [$node->getIndex()];
             while ($node = $node->getParent()) {
                 $indexPath[] = $node->getIndex();
             }
             $indexPathCache[$nodeIdentifier] = $indexPath;
         }
 
-        $cmpIndex = function (NodeInterface $a, NodeInterface $b) use ($indexPathCache) {
-            if ($a == $b) {
+        $flip = $sortOrder === 'DESC' ? -1 : 1;
+
+        usort($nodes, function (NodeInterface $a, NodeInterface $b) use ($indexPathCache, $flip) {
+            if ($a === $b) {
                 return 0;
             }
 
@@ -88,18 +77,12 @@ class SortRecursiveByIndexOperation extends AbstractOperation
             while (count($aIndexPath) > 0 && count($bIndexPath) > 0) {
                 $diff = (array_pop($aIndexPath) - array_pop($bIndexPath));
                 if ($diff !== 0) {
-                    return $diff < 0 ? -1 : 1;
+                    return $flip * $diff < 0 ? -1 : 1;
                 }
             }
 
             return 0;
-        };
-
-        usort($nodes, $cmpIndex);
-
-        if ($sortOrder === 'DESC') {
-            $nodes = array_reverse($nodes);
-        }
+        });
 
         $flowQuery->setContext($nodes);
     }

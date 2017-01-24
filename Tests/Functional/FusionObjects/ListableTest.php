@@ -1,12 +1,8 @@
 <?php
-namespace Flowpack\Listable\Tests\Functional\TypoScriptObjects;
+namespace Flowpack\Listable\Tests\Functional\FusionObjects;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
-use Flowpack\Listable\Tests\Functional\TypoScriptObjects\AbstractTypoScriptObjectTest;
 
-/**
- * Testcase for the Listable object
- */
 class ListableTest extends AbstractTypoScriptObjectTest
 {
     /**
@@ -15,13 +11,13 @@ class ListableTest extends AbstractTypoScriptObjectTest
     public function basicListingWorks()
     {
         $newNode1 = $this->getMockBuilder(NodeInterface::class)->getMock();
-        $newNode1->method('getProperties')->willReturn(array('title' => 'Hello world'));
+        $newNode1->method('getProperties')->willReturn(['title' => 'Hello world']);
         $newNode2 = $this->getMockBuilder(NodeInterface::class)->getMock();
-        $newNode2->method('getProperties')->willReturn(array('title' => 'Another hello world!'));
+        $newNode2->method('getProperties')->willReturn(['title' => 'Another hello world!']);
 
         $view = $this->buildView();
         $view->setFusionPath('listable/basicListing');
-        $view->assign('collection', array($newNode1, $newNode2));
+        $view->assign('collection', [$newNode1, $newNode2]);
         $this->assertXmlStringEqualsXmlString(
           '<ul>
             <li>Hello world</li>

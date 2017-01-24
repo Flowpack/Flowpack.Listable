@@ -5,10 +5,10 @@ namespace Flowpack\Listable\Fusion\Eel\FlowQueryOperations;
  * This script belongs to the Flow package "Flowpack.Listable".           *
  *                                                                        */
 
+use Neos\Eel\FlowQuery\FlowQueryException;
 use Neos\Eel\FlowQuery\Operations\AbstractOperation;
 use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
-use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 
 /**
@@ -18,15 +18,11 @@ class FilterByDateOperation extends AbstractOperation
 {
     /**
      * {@inheritdoc}
-     *
-     * @var string
      */
     protected static $shortName = 'filterByDate';
 
     /**
      * {@inheritdoc}
-     *
-     * @var integer
      */
     protected static $priority = 100;
 
@@ -34,9 +30,6 @@ class FilterByDateOperation extends AbstractOperation
      * {@inheritdoc}
      *
      * We can only handle CR Nodes.
-     *
-     * @param mixed $context
-     * @return boolean
      */
     public function canEvaluate($context)
     {
@@ -46,43 +39,39 @@ class FilterByDateOperation extends AbstractOperation
     /**
      * {@inheritdoc}
      *
-     * @param FlowQuery $flowQuery the FlowQuery object
-     * @param array $arguments the arguments for this operation.
-     * First argument is property to filter by, must be DateTime.
-     * Second is Date operand, must be DateTime object.
-     * And third is a compare operator: '<' or '>', '>' by default
-     * @return mixed
+     * @param array $arguments The arguments for this operation.
+     *                         First argument is property to filter by, must be DateTime.
+     *                         Second is Date operand, must be DateTime object.
+     *                         And third is a compare operator: '<' or '>', '>' by default
+     *
+     * @return void
+     * @throws FlowQueryException
      */
     public function evaluate(FlowQuery $flowQuery, array $arguments)
     {
-        if (!isset($arguments[0]) || empty($arguments[0])) {
-            throw new \Neos\Eel\FlowQuery\FlowQueryException('filterByDate() needs property name by which nodes should be filtered', 1332492263);
-        } elseif (!isset($arguments[1]) || empty($arguments[1])) {
-            throw new \Neos\Eel\FlowQuery\FlowQueryException('filterByDate() needs date value by which nodes should be filtered', 1332493263);
-        } else {
-            $nodes = $flowQuery->getContext();
-            $filterByPropertyPath = $arguments[0];
-            $date = $arguments[1];
-            $compareOperator = '>';
-            if (isset($arguments[2]) && !empty($arguments[2]) && in_array($arguments[2], array('<', '>'))) {
-                $compareOperator = $arguments[2];
-            }
-            $filteredNodes = array();
-            /** @var Node $node  */
-            foreach ($nodes as $node) {
-                $propertyValue = $node->getProperty($filterByPropertyPath);
-                if ($compareOperator == '>') {
-                    if ($propertyValue > $date) {
-                        $filteredNodes[] = $node;
-                    }
-                }
-                if ($compareOperator == '<') {
-                    if ($propertyValue < $date) {
-                        $filteredNodes[] = $node;
-                    }
-                }
-            }
-            $flowQuery->setContext($filteredNodes);
+        if (empty($arguments[0])) {
+            throw new FlowQueryException('filterByDate() needs property name by which nodes should be filtered', 1332492263);
         }
+        if (empty($arguments[1])) {
+            throw new FlowQueryException('filterByDate() needs date value by which nodes should be filtered', 1332493263);
+        }
+
+        /** @var \DateTime $date */
+        list($filterByPropertyPath, $date) = $arguments;
+        $compareOperator = '>';
+        if (!empty($arguments[2]) && in_array($arguments[2], ['<', '>'], true)) {
+            $compareOperator = $arguments[2];
+        }
+
+        $filteredNodes = [];
+        foreach ($flowQuery->getContext() as $node) {
+            /** @var NodeInterface $node */
+            $propertyValue = $node->getProperty($filterByPropertyPath);
+            if (($compareOperator === '>' && $propertyValue > $date) || ($compareOperator === '<' && $propertyValue < $date)) {
+                $filteredNodes[] = $node;
+            }
+        }
+
+        $flowQuery->setContext($filteredNodes);
     }
 }

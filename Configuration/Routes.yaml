@@ -1,29 +1,19 @@
-# Add something like this to Routes.yaml of your distribution, but before Neos routes!
-#
-# -
-#   name: 'Listable'
-#   uriPattern: '<ListableSubroutes>'
-#   subRoutes:
-#     'ListableSubroutes':
-#       package: 'Flowpack.Listable'
-#       variables:
-#         'defaultUriSuffix': ''
-#         'pageSeparator': '~p'
-
 -
   name: 'Paginate for Flowpack.Listable:Listable'
-  uriPattern:    '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
+  uriPattern: '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
   defaults:
-    '@package':    'Neos.Neos'
+    '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
-    '@format':     'html'
-    '@action':     'show'
+    '@format': 'html'
+    '@action': 'show'
     '--listable-paginate':
       '@package': ''
       '@subpackage': ''
       '@controller': ''
       '@action': 'index'
       'currentPage': '1'
+    pageSeparator: '~p'
+    defaultUriSuffix: ''
   routeParts:
     node:
       handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler
