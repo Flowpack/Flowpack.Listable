@@ -1,10 +1,15 @@
 Neos:
+  Flow:
+    mvc:
+      routes:
+        'Flowpack.Listable':
+          position: 'before Neos.Neos'
   Neos:
+    fusion:
+      autoInclude:
+        Flowpack.Listable: true
     userInterface:
       translation:
         autoInclude:
           Flowpack.Listable:
             - 'NodeTypes/*'
-    fusion:
-      autoInclude:
-        Flowpack.Listable: true

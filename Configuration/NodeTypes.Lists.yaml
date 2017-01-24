@@ -1,4 +1,3 @@
-
 'Flowpack.Listable:ListNode':
   superTypes:
     'Neos.Neos:Content': true

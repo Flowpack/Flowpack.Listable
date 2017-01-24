@@ -1,5 +1,5 @@
 'Flowpack.Listable:ListableMixin':
-  abstract: TRUE
+  abstract: true
 
 'Flowpack.Listable:ListableCategoryMixin':
-  abstract: TRUE
+  abstract: true

@@ -1,0 +1,8 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: resource://Neos.Neos/Private/Fusion/Root.fusion
+include: resource://Flowpack.Listable/Private/Fusion/Root.fusion
+
+listable.basicListing = Flowpack.Listable:Listable {
+    itemRenderer = ${node.properties.title}
+    collection = ${collection}
+}

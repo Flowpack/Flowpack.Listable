@@ -1,17 +1,15 @@
 <?php
-namespace Flowpack\Listable\Tests\Functional\TypoScriptObjects;
+namespace Flowpack\Listable\Tests\Functional\FusionObjects;
 
 use Neos\Flow\Http\Request;
 use Neos\Flow\Http\Response;
 use Neos\Flow\Mvc\Controller\Arguments;
 use Neos\Flow\Mvc\Controller\ControllerContext;
 use Neos\Flow\Mvc\Routing\UriBuilder;
+use Neos\Flow\Tests\FunctionalTestCase;
+use Neos\Fusion\View\FusionView;
 
-/**
- * Testcase for the TypoScript View
- *
- */
-abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalTestCase
+abstract class AbstractTypoScriptObjectTest extends FunctionalTestCase
 {
     /**
      * @var ControllerContext
@@ -19,13 +17,13 @@ abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalT
     protected $controllerContext;
 
     /**
-     * Helper to build a TypoScript view object
+     * Helper to build a Fusion view object
      *
-     * @return \Neos\Fusion\View\FusionView
+     * @return FusionView
      */
     protected function buildView()
     {
-        $view = new \Neos\Fusion\View\FusionView();
+        $view = new FusionView();
 
         $httpRequest = Request::createFromEnvironment();
         $request = $httpRequest->createActionRequest();
@@ -36,7 +34,7 @@ abstract class AbstractTypoScriptObjectTest extends \Neos\Flow\Tests\FunctionalT
         $this->controllerContext = new ControllerContext(
             $request,
             new Response(),
-            new Arguments(array()),
+            new Arguments([]),
             $uriBuilder
         );
 
