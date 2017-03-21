@@ -1,0 +1,39 @@
+# This convienince object wraps Listable with a title and an archive link
+prototype(Flowpack.Listable:List) < prototype(PackageFactory.AtomicFusion:Component) {
+    list = Flowpack.Listable:Listable
+    # These settings are public API:
+    wrapClass = ''
+    listTitle = ''
+    listTitleClass = ''
+    archiveLink = ''
+    archiveLinkTitle = ''
+    archiveLinkClass = ''
+    archiveLinkAdditionalParams = ${{}}
+
+    renderer = Neos.Fusion:Tag {
+        # Don't render the List object if the list is empty
+        @if.listNotEmpty = ${props.list != null}
+
+        attributes.class = ${props.wrapClass}
+        content = Neos.Fusion:Array {
+            listTitleTag = Neos.Fusion:Tag {
+                tagName = 'h2'
+                attributes.class = ${props.listTitleClass}
+                attributes.class.@if.isSet = ${props.listTitleClass ? true : false}
+                content = ${props.listTitle}
+                @if.isSet = ${!String.isBlank(props.listTitle) && !String.isBlank(props.list)}
+            }
+            list = ${props.list}
+            archiveLink = Neos.Fusion:Tag {
+                tagName = 'a'
+                attributes.class = ${props.archiveLinkClass}
+                attributes.href = Neos.Neos:NodeUri {
+                    node = ${props.archiveLink}
+                    additionalParams = ${props.archiveLinkAdditionalParams}
+                }
+                content = ${props.archiveLinkTitle}
+                @if.isSet = ${props.archiveLink != ''}
+            }
+        }
+    }
+}

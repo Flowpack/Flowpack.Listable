@@ -1,0 +1,53 @@
+prototype(Flowpack.Listable:PaginationArray) {
+    @class = 'Flowpack\\Listable\\Fusion\\PaginationArrayImplementation'
+    currentPage = ''
+    maximumNumberOfLinks = ''
+    count = ''
+    itemsPerPage = ''
+}
+prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:Component) {
+    collection = 'to-be-set'
+    maximumNumberOfLinks = 15
+    itemsPerPage = 24
+    class = 'Pagination'
+    itemClass = 'Pagination-item'
+    currentItemClass = 'isCurrent'
+    # Not part of API
+    currentPage = ${request.arguments.currentPage || 1}
+
+    renderer = Neos.Fusion:Collection {
+        @if.paginationNeeded = ${props.collection && (q(props.collection).count()/props.itemsPerPage) > 1}
+        @process.tmpl = ${'<ul class="' + props.class + '">' + value + '</ul>'}
+        collection = Flowpack.Listable:PaginationArray {
+            currentPage = ${props.currentPage}
+            maximumNumberOfLinks = ${props.maximumNumberOfLinks}
+            count = ${q(props.collection).count()}
+            itemsPerPage = ${props.itemsPerPage}
+        }
+        itemName = 'i'
+        itemRenderer = Neos.Fusion:Case {
+            separator {
+                condition = ${i == '...'}
+                renderer = ${'<li class="' + props.itemClass + '">' + i + '</li>'}
+            }
+            currentPage {
+                condition = ${String.toInteger(i) == String.toInteger(props.currentPage)}
+                renderer = ${'<li class="' + props.itemClass + ' ' + props.currentItemClass + '"><a>' + i + '</a></li>'}
+            }
+            link {
+                condition = ${true}
+                renderer = Neos.Fusion:Tag {
+                    @process.tmpl = ${'<li class="' + props.itemClass + '">' + value + '</li>'}
+                    tagName = 'a'
+                    attributes.href = NodeUri {
+                        node = ${documentNode}
+                        additionalParams = Neos.Fusion:RawArray {
+                            currentPage = ${i}
+                        }
+                    }
+                    content = ${i}
+                }
+            }
+        }
+    }
+}
