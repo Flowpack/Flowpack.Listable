@@ -15,6 +15,9 @@ class PaginationArrayImplementation extends AbstractFusionObject
 		$itemsPerPage = $this->tsValue('itemsPerPage');
 		$count = $this->tsValue('count');
 		$currentPage = $this->tsValue('currentPage');
+		if ($count > 0 !== true) {
+			return [];
+		}
 		$numberOfPages = ceil($count / $itemsPerPage);
 		if ($maximumNumberOfLinks > $numberOfPages) {
 			$maximumNumberOfLinks = $numberOfPages;
