@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="" product-name="Flowpack.Listable" source-language="en" target-language="ru" datatype="plaintext">
+    <body>
+      <trans-unit id="ui.label" xml:space="preserve">
+        <target>Список Listable</target>
+      </trans-unit>
+      <trans-unit id="groups.list" xml:space="preserve">
+        <target>Настройки списка</target>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder" xml:space="preserve">
+        <target>Порядок сортировки</target>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder.selectBoxEditor.values.DESC" xml:space="preserve">
+        <target>По убыванию</target>
+      </trans-unit>
+      <trans-unit id="properties.sortOrder.selectBoxEditor.values.ASC" xml:space="preserve">
+        <target>По возрастанию</target>
+      </trans-unit>
+      <trans-unit id="properties.paginationEnabled" xml:space="preserve">
+        <target>Включить пагинацию</target>
+      </trans-unit>
+      <trans-unit id="properties.sortProperty" xml:space="preserve">
+        <target>Свойство для сортировки</target>
+      </trans-unit>
+      <trans-unit id="properties.limit" xml:space="preserve">
+        <target>Максимальное кол-во элементов</target>
+      </trans-unit>
+      <trans-unit id="properties.itemsPerPage" xml:space="preserve">
+        <target>Элементов на странице</target>
+      </trans-unit>
+      <trans-unit id="properties.wrapClass" xml:space="preserve">
+        <target>Класс обертки</target>
+      </trans-unit>
+      <trans-unit id="properties.class" xml:space="preserve">
+        <target>Класс списка</target>
+      </trans-unit>
+      <trans-unit id="properties.itemClass" xml:space="preserve">
+        <target>Класс элемента</target>
+      </trans-unit>
+      <trans-unit id="properties.listTitleClass" xml:space="preserve">
+        <target>Класс заголовка</target>
+      </trans-unit>
+      <trans-unit id="properties.listTitle" xml:space="preserve">
+        <target>Заголовок</target>
+      </trans-unit>
+      <trans-unit id="properties.itemRenderer" xml:space="preserve">
+        <target>Рендерер</target>
+      </trans-unit>
+      <trans-unit id="properties.rootNode" xml:space="preserve">
+        <target>Корневой элемент</target>
+      </trans-unit>
+      <trans-unit id="properties.archiveLink" xml:space="preserve">
+        <target>Ссылка на архив</target>
+      </trans-unit>
+      <trans-unit id="properties.archiveLinkTitle" xml:space="preserve">
+        <target>Название ссылки на архив</target>
+      </trans-unit>
+      <trans-unit id="properties.archiveLinkClass" xml:space="preserve">
+        <target>Класс ссылки на архив</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
