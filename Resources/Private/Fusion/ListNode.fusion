@@ -9,7 +9,7 @@ prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
     archiveLinkClass = ${q(node).property('archiveLinkClass')}
 
     prototype(Flowpack.Listable:Listable) {
-        listClass = ${q(node).property('listClass')}
+        listClass = ${q(node).property('class')}
         itemClass = ${q(node).property('itemClass')}
         sortProperty = ${q(node).property('sortProperty')}
         sortOrder = ${q(node).property('sortOrder')}
@@ -39,5 +39,5 @@ prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
             4 = ${'DescendantOf_' + rootNode.identifier}
         }
     }
-    @process.contentElementWrapping = Neos.Neos:ContentElementWrapping
+    @process.contentElementWrapping = ContentElementWrapping
 }
