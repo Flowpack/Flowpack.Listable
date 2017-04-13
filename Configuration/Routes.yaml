@@ -12,8 +12,6 @@
       '@controller': ''
       '@action': 'index'
       'currentPage': '1'
-    pageSeparator: '~p'
-    defaultUriSuffix: ''
   routeParts:
     node:
       handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler
