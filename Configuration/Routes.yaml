@@ -1,19 +1,11 @@
 -
-  name: 'Paginate for Flowpack.Listable:Listable'
-  uriPattern: '{node}<pageSeparator>{--listable-paginate.currentPage}<defaultUriSuffix>'
+  name: 'Paginate for Flowpack.Listable'
+  uriPattern: '{node}<pageSeparator>{currentPage}<defaultUriSuffix>'
   defaults:
     '@package': 'Neos.Neos'
     '@controller': 'Frontend\Node'
     '@format': 'html'
     '@action': 'show'
-    '--listable-paginate':
-      '@package': ''
-      '@subpackage': ''
-      '@controller': ''
-      '@action': 'index'
-      'currentPage': '1'
-    pageSeparator: '~p'
-    defaultUriSuffix: ''
   routeParts:
     node:
       handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler

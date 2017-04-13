@@ -4,6 +4,9 @@ Neos:
       routes:
         'Flowpack.Listable':
           position: 'before Neos.Neos'
+          variables:
+            pageSeparator: '~p'
+            defaultUriSuffix: '.html'
   Neos:
     fusion:
       autoInclude:
