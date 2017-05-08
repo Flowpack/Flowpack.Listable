@@ -1,0 +1,36 @@
+# QueryInterface exposes RawArray with `collection` and `totalCount` keys
+prototype(Flowpack.Listable:QueryInterface) < prototype(PackageFactory.AtomicFusion:Component) {
+    collection = ''
+    offset = ''
+    limit = ''
+    sortProperty = ''
+    sortOrder = ''
+    paginationEnabled = ''
+    currentPage = ''
+    itemsPerPage = ''
+
+    renderer = Neos.Fusion:RawArray {
+        collection = Neos.Fusion:Case {
+            @context.limit = ${props.paginationEnabled ? props.currentPage * props.itemsPerPage : props.limit}
+            @context.offset = ${props.paginationEnabled ? (props.currentPage - 1) * props.itemsPerPage : props.offset}
+            elasticSearch {
+                condition = ${Type.instance(props.collection, 'Flowpack\ElasticSearch\ContentRepositoryAdaptor\Eel\ElasticSearchQueryBuilder')}
+                renderer = ${props.collection}
+                renderer.@process.sort = ${props.sortOrder == 'ASC' ? value.sortAsc(props.sortProperty) : value.sortDesc(props.sortProperty)}
+                renderer.@process.sort.@if.isSet = ${props.sortProperty != ''}
+                renderer.@process.limit = ${value.limit(limit)}
+                renderer.@process.offset = ${value.from(offset)}
+                renderer.@process.execute = ${value.execute()}
+            }
+            default {
+                condition = ${true}
+                renderer = ${Type.instance(props.collection, 'Neos\Eel\FlowQuery\FlowQuery') ? props.collection : q(props.collection)}
+                renderer.@process.sort = ${value.sort(props.sortProperty, props.sortOrder)}
+                renderer.@process.sort.@if.isSet = ${props.sortProperty != ''}
+                renderer.@process.slice = ${value.slice(offset, limit)}
+                renderer.@process.execute = ${value.get()}
+            }
+        }
+        totalCount = ${Type.getType(props.collection) == 'array' ? q(props.collection).count() : props.collection.count()}
+    }
+}

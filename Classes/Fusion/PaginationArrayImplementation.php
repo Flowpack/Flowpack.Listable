@@ -13,12 +13,12 @@ class PaginationArrayImplementation extends AbstractFusionObject
 	{
 		$maximumNumberOfLinks = $this->tsValue('maximumNumberOfLinks') - 2;
 		$itemsPerPage = $this->tsValue('itemsPerPage');
-		$count = $this->tsValue('count');
+		$totalCount = $this->tsValue('totalCount');
 		$currentPage = $this->tsValue('currentPage');
-		if ($count > 0 !== true) {
+		if ($totalCount > 0 !== true) {
 			return [];
 		}
-		$numberOfPages = ceil($count / $itemsPerPage);
+		$numberOfPages = ceil($totalCount / $itemsPerPage);
 		if ($maximumNumberOfLinks > $numberOfPages) {
 			$maximumNumberOfLinks = $numberOfPages;
 		}

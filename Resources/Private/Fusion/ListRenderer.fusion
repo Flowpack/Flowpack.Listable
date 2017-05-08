@@ -1,0 +1,22 @@
+# ListRenderer is only concerned with rendering the already pre-processed data
+# You can replace it with your own custom renderer
+prototype(Flowpack.Listable:ListRenderer) < prototype(PackageFactory.AtomicFusion:Component) {
+    collection = ''
+    itemRenderer = ''
+    itemClass = ''
+    listClass = ''
+
+    renderer = Neos.Fusion:Collection {
+        @process.tmpl = ${'<ul class="' + props.listClass + '">' + value + '</ul>'}
+        collection = ${props.collection}
+        itemName = 'node'
+        itemRenderer = Flowpack.Listable:ContentCaseShort {
+            itemRendererByObject {
+                condition = ${props.itemRenderer != ''}
+                @position = 'start'
+                type = ${props.itemRenderer}
+            }
+            @process.tmpl = ${'<li class="' + props.itemClass + '">' + value + '</li>'}
+        }
+    }
+}

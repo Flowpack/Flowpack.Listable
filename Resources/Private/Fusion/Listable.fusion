@@ -1,41 +1,46 @@
 prototype(Flowpack.Listable:Listable) < prototype(PackageFactory.AtomicFusion:Component) {
     currentPage = ${request.arguments.currentPage || 1}
-    # These settings are public API:
-    listClass = 'Listable'
-    itemClass = 'Listable-item'
+    ##################################
+    # These settings are public API: #
+    ##################################
+
+    # Can either be an array, a FlowQuery object or an ElasticSearchQueryBuilder object
+    collection = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
     sortProperty = ''
     sortOrder = 'DESC'
     limit = 10000
     offset = 0
-    itemRenderer = ''
+
     paginationEnabled = true
     itemsPerPage = 24
     maximumNumberOfLinks = 15
-    collection = ${q(site).find('[instanceof Flowpack.Listable:ListableMixin]').get()}
 
+    listClass = 'Listable'
+    itemClass = 'Listable-item'
+
+    itemRenderer = ''
 
     renderer = Neos.Fusion:Array {
-        list = Neos.Fusion:Collection {
-            @process.tmpl = ${'<ul class="' + props.listClass + '">' + value + '</ul>'}
+        @context.data = Flowpack.Listable:QueryInterface {
             collection = ${props.collection}
-            collection.@process.sort = ${value && q(value).count() > 0 && props.sortProperty ? q(value).sort(props.sortProperty, props.sortOrder).get() : value}
-            collection.@process.slice = ${value && q(value).count() > 0 ? q(value).slice(String.toInteger(props.offset), String.toInteger(props.limit)).get() : value}
-            collection.@process.paginate = ${q(value).slice((props.currentPage - 1) * props.itemsPerPage, props.currentPage * props.itemsPerPage).get()}
-            collection.@process.paginate.@if.paginationEnabled = ${props.paginationEnabled}
-            itemName = 'node'
-            itemRenderer = Flowpack.Listable:ContentCaseShort {
-                itemRendererByObject {
-                    condition = ${props.itemRenderer != ''}
-                    @position = 'start'
-                    type = ${props.itemRenderer}
-                }
-                @process.tmpl = ${'<li class="' + props.itemClass + '">' + value + '</li>'}
-            }
+            offset = ${props.offset}
+            limit = ${props.limit}
+            sortProperty = ${props.sortProperty}
+            sortOrder = ${props.sortOrder}
+            paginationEnabled = ${props.paginationEnabled}
+            currentPage = ${props.currentPage}
+            itemsPerPage = ${props.itemsPerPage}
+        }
+
+        list = Flowpack.Listable:ListRenderer {
+            collection = ${data.collection}
+            itemRenderer = ${props.itemRenderer}
+            itemClass = ${props.itemClass}
+            listClass = ${props.listClass}
         }
         pagination = Flowpack.Listable:Pagination {
             @if.paginationEnabled = ${props.paginationEnabled}
-            # Pass down the props to pagination
-            collection = ${props.collection}
+            totalCount = ${data.totalCount}
             currentPage = ${props.currentPage}
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
             itemsPerPage = ${props.itemsPerPage}

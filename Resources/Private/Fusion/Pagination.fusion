@@ -2,13 +2,14 @@ prototype(Flowpack.Listable:PaginationArray) {
     @class = 'Flowpack\\Listable\\Fusion\\PaginationArrayImplementation'
     currentPage = ''
     maximumNumberOfLinks = ''
-    count = ''
+    totalCount = ''
     itemsPerPage = ''
 }
 prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:Component) {
-    collection = 'to-be-set'
+    totalCount = 'to-be-set'
     maximumNumberOfLinks = 15
     itemsPerPage = 24
+
     class = 'Pagination'
     itemClass = 'Pagination-item'
     currentItemClass = 'isCurrent'
@@ -16,12 +17,12 @@ prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:
     currentPage = ${request.arguments.currentPage || 1}
 
     renderer = Neos.Fusion:Collection {
-        @if.paginationNeeded = ${props.collection && (q(props.collection).count()/props.itemsPerPage) > 1}
+        @if.paginationNeeded = ${(props.totalCount/props.itemsPerPage) > 1}
         @process.tmpl = ${'<ul class="' + props.class + '">' + value + '</ul>'}
         collection = Flowpack.Listable:PaginationArray {
             currentPage = ${props.currentPage}
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
-            count = ${q(props.collection).count()}
+            totalCount = ${props.totalCount}
             itemsPerPage = ${props.itemsPerPage}
         }
         itemName = 'i'
