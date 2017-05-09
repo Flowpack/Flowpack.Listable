@@ -41,4 +41,17 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(PackageFactory.Atom
             itemsPerPage = ${props.itemsPerPage}
         }
     }
+
+    @cache {
+        mode = 'dynamic'
+        entryIdentifier {
+            node = ${node}
+        }
+        entryDiscriminator = ${request.arguments.currentPage}
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+        }
+    }
 }
