@@ -13,7 +13,6 @@ prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:
     class = 'Pagination'
     itemClass = 'Pagination-item'
     currentItemClass = 'isCurrent'
-    # Not part of API
     currentPage = ${request.arguments.currentPage || 1}
 
     renderer = Neos.Fusion:Collection {

@@ -1,4 +1,4 @@
-# This convienince object wraps Listable with a title and an archive link
+# This convienince object wraps your list with a title and an archive link
 prototype(Flowpack.Listable:List) < prototype(PackageFactory.AtomicFusion:Component) {
     list = ${value}
     # These settings are public API:
