@@ -1,0 +1,43 @@
+# This object is experimental and may not be working yet
+prototype(Flowpack.Listable:ListNode) < prototype(Flowpack.Listable:List) {
+    @context.rootNode = ${q(node).property('rootNode') || documentNode}
+    wrapClass = ${q(node).property('wrapClass')}
+    listTitle = ${q(node).property('listTitle')}
+    listTitleClass = ${q(node).property('listTitleClass')}
+    archiveLink = ${q(node).property('archiveLink')}
+    archiveLinkTitle = ${q(node).property('archiveLinkTitle')}
+    archiveLinkClass = ${q(node).property('archiveLinkClass')}
+
+    prototype(Flowpack.Listable:Listable) {
+        listClass = ${q(node).property('class')}
+        itemClass = ${q(node).property('itemClass')}
+        sortProperty = ${q(node).property('sortProperty')}
+        sortOrder = ${q(node).property('sortOrder')}
+        limit = ${q(node).property('limit') > 0 ? String.toInteger(q(node).property('limit')) : 10000}
+        itemRenderer = ${q(node).property('itemRenderer')}
+        paginationEnabled = ${q(node).property('paginationEnabled')}
+        itemsPerPage = ${q(node).property('itemsPerPage') > 0 ? String.toInteger(q(node).property('itemsPerPage')) : 24}
+
+        collection = ${q(rootNode).children('[instanceof Flowpack.Listable:ListableMixin]').get()}
+    }
+
+    @cache {
+        mode = 'dynamic'
+        entryIdentifier {
+            node = ${node}
+        }
+        entryDiscriminator = ${request.arguments.currentPage}
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+        }
+        entryTags {
+            1 = ${'Node_' + node.identifier}
+            2 = ${'Node_' + documentNode.identifier}
+            3 = ${'Node_' + rootNode.identifier}
+            4 = ${'DescendantOf_' + rootNode.identifier}
+        }
+    }
+    @process.contentElementWrapping = ContentElementWrapping
+}

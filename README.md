@@ -6,12 +6,11 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 # TL;DR
 
 1. Install the package with composer: `composer require flowpack/listable` [Here it is on packagist](https://packagist.org/packages/flowpack/listable).
-2. Add `Flowpack.Listable:ListableMixin` to nodetypes that you want to list.
-2. Build your list based on `Flowpack.Listable:Listable` for a simple list or on `Flowpack.Listable:List` for a list with a header and an archive link.
-3. For each of your nodetypes create a new Fusion object of type NodeTypeName + 'Short', or manually define a rendering object.
-4. Rely on public API keys when overriding settings.
-
-If you don't need the package, but love Fusion, [look here](Resources/Private/Fusion/Api.fusion), you may find some inspiration :)
+2. If you want a paginated list, use `Flowpack.Listable:PaginatedCollection`.
+3. If you just want a simple list, use `Flowpack.Listable:Collection` (or just `Neos.Fusion:Collection`!).
+4. If you need a list with a header and an archive link, wrap you list into `Flowpack.Listable:List`
+5. For each of your nodetypes create a new Fusion object of type NodeTypeName + 'Short', or manually define a rendering object.
+6. Rely on public API keys when overriding settings.
 
 # Nodetype mixins
 
@@ -21,40 +20,72 @@ On data level we provide only one mixin: `Flowpack.Listable:ListableMixin`. The 
 
 Keys documented here are considered public API and would be treated with semantic versioning in mind. Extend all other properties at your own risk.
 
-## Flowpack.Listable:Listable
+## Flowpack.Listable:Collection
 
-At the heart of this package is the `Flowpack.Listable:Listable` object. It provides some good defaults for rendering lists of things, and is pretty extensible too. Here are the Fusion context variables that you can configure for this object:
+This object is just a simple convienince wrapper around `Neos.Fusion:Collection`, use it if you want to save a few keystrokes.
+It wraps the list with UL and LI tags with a provided name and also set `Flowpack.Listable:ContentCaseShort` as a default for itemRenderer.
+
+Configuration options:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
+| collection | An instance of `ElasticSearchQueryBuilder`, `FlowQuery` object or an `array` of nodes | 'to-be-set' |
 | listClass | Classname of UL tag | '' |
 | itemClass | Classname of LI tag wrapping each item | '' |
-| sortProperty | Sort by property | '' |
-| sortOrder | Sort order | 'DESC' |
-| limit | Limit number of results. Set to high number when using with pagination | 10000 |
-| offset | Offset results by some value (i.e. skip a number of first records) | 0 |
-| paginationEnabled | Enable pagination | true |
-| itemsPerPage | Number of items per page when using pagination | 24 |
-| maximumNumberOfLinks | Number of page links in pagination | 15 |
-| queryType | Predefined query types, choose between `getFromCurrentPage` and `getAll` | 'getAll' |
 | itemRenderer | Object used for rendering child items. Within it you get two context vars set: `node` and `iterator` | 'Flowpack.Listable:ContentCaseShort' |
+| itemName | Name of the the node context variable | 'node' |
+| iterationName | Name of the the iterator context variable | 'iteration' |
 
-You may also override `collection` key with custom query. Sorting and pagination would still apply (via `@process`). Here's an example that lists the first 10 objects of type `Something.Custom:Here`.
+Example:
 
 ```
-prototype(My.Custom:Object) < prototype(Flowpack.Listable:Listable) {
-  @context.limit = 10
-  collection = ${q(site).find('[instanceof Something.Custom:Here]').get()}
+prototype(My.Custom:Object) < prototype(Flowpack.Listable:Collection) {
+  collection = ${q(site).find('[instanceof Something.Custom:Here]').sort('date', 'DESC').slice(0, 6).get()}
+  listClass = 'MyList'
+  itemClass = 'MyList-item'
 }
 ```
+
+It would use the object `Something.Custom:HereShort` for rendering each item.
+
+Make sure to correctly configure the cache.
+
+## Flowpack.Listable:PaginatedCollection
+
+This object allows you to paginate either **ElasticSearch** results, FlowQuery result objects or pure Node arrays.
+
+Configuration options:
+
+| Setting | Description | Defaults |
+|---------|-------------|----------|
+| collection | An instance of `ElasticSearchQueryBuilder`, `FlowQuery` object or an `array` of nodes | 'to-be-set' |
+| itemsPerPage | Number of items per page when using pagination | 24 |
+| maximumNumberOfLinks | Number of page links in pagination | 15 |
+| listClass | Classname of UL tag | '' |
+| itemClass | Classname of LI tag wrapping each item | '' |
+| itemRenderer | Object used for rendering child items. Within it you get two context vars set: `node` and `iterator` | 'Flowpack.Listable:ContentCaseShort' |
+
+When used with ElasticSearch, build the query, but don't execute it, the object will do it for you:
+
+```
+prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
+  collection = ${Search.query(site).nodeType('Something.Custom:Here').sortDesc('date')}
+  itemsPerPage = 12
+  prototype(Flowpack.Listable:Collection) {
+    listClass = 'MyPaginatedList'
+    itemClass = 'MyPaginatedList-item'
+  }
+}
+```
+
+This object is configured by default to `dynamic` cache mode for pagination to work. All you have to do is add correct `entryTags` and you are all set.
 
 ## Flowpack.Listable:List
 
 There's often a need to render a list with a header and an archive link.
-This object takes `Flowpack.Listable:Listable` and wraps it with just that.
+This object takes your list and wraps it with just that.
 
-This is just a helper object, and in many cases you would not want to use it,
-but use `Flowpack.Listable:Listable` directly.
+Configuration options:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
@@ -65,17 +96,38 @@ but use `Flowpack.Listable:Listable` directly.
 | archiveLinkTitle | Title of the archive link | '' |
 | archiveLinkClass | Classname of the archive link | '' |
 | archiveLinkAdditionalParams | AdditionalParams of the archive link, e.g. `@context.archiveLinkAdditionalParams = ${{archive: 1}}` | {} |
+| list | A list that this object should wrap | `value` |
 
-# Configuring pagination
-
-Besides enabling pagination in the Fusion object, you must not forget about adding the pagination entryIdentifier to all parent cache objects, e.g. like this:
+Example:
 
 ```
-prototype(Neos.Neos:Page).@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
-root.@cache.entryIdentifier.pagination = ${request.pluginArguments.listable-paginate.currentPage}
+prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
+  @process.list = Flowpack.Listable:List {
+    listTitle = 'My List'
+    archiveLink = '~/page-path-or-identifier'
+    archiveLinkTitle = 'See all news'
+  }
+  collection = ${q(site).find('[instanceof Something.Custom:Here]').sort('date', 'DESC').slice(0, 6).get()}
+}
 ```
 
-# FlowQuery Helper you can use
+## Flowpack.Listable:Pagination
+
+You can also use pagination standalone from the `PaginatedCollection`.
+
+Configuration options:
+
+| Setting | Description | Defaults |
+|---------|-------------|----------|
+| totalCount | A total count of items | 'to-be-set' |
+| itemsPerPage | Number of items per page | 24 |
+| maximumNumberOfLinks | A maximum number of links | 15 |
+| class | A class around pagination | 'Pagination' |
+| itemClass | A total count of items | 'Pagination-item' |
+| currentItemClass | A class for a current item | 'isCurrent' |
+| currentPage | Current page, starting with 1 | `${request.arguments.currentPage || 1}` |
+
+# FlowQuery Helpers you can use
 
 ## filterByDate
 
@@ -84,16 +136,6 @@ Filter nodes by properties of type date.
 ## filterByReference
 
 Filter nodes by properties of type reference or references.
-
-## sort
-
-Sort nodes by any property.
-
-Neos doesn't have built-in sort FlowQuery operation (originally due to performance considerations). Sorting large amounts of nodes in-memory won't perform well, and [a proper indexed search](https://github.com/Flowpack/Flowpack.ElasticSearch) would always do a better job. But if you have not too many nodes (~<10000) plain in-memory sorting may be a decent choice, especially for cached views. So give it a try before investing into more complex solutions.
-
-Example:
-
-    ${q(site).find('[instanceof Neos.Neos:Document]').sort('title', 'ASC').get()}
 
 ## sortRecursiveByIndex
 

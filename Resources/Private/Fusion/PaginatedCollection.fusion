@@ -1,0 +1,57 @@
+prototype(Flowpack.Listable:PaginatedCollection) < prototype(PackageFactory.AtomicFusion:Component) {
+    currentPage = ${request.arguments.currentPage || 1}
+    ##################################
+    # These settings are public API: #
+    ##################################
+    collection = 'must-be-set'
+    itemsPerPage = 24
+    maximumNumberOfLinks = 15
+    listRenderer = 'Flowpack.Listable:Collection'
+
+    renderer = Neos.Fusion:Array {
+        @context.data = Neos.Fusion:RawArray {
+            collection = Neos.Fusion:Case {
+                @context.limit = ${props.currentPage * props.itemsPerPage}
+                @context.offset = ${(props.currentPage - 1) * props.itemsPerPage}
+                elasticSearch {
+                    condition = ${Type.instance(props.collection, 'Flowpack\ElasticSearch\ContentRepositoryAdaptor\Eel\ElasticSearchQueryBuilder')}
+                    renderer = ${props.collection}
+                    renderer.@process.limit = ${value.limit(limit)}
+                    renderer.@process.offset = ${value.from(offset)}
+                    renderer.@process.execute = ${value.execute()}
+                }
+                default {
+                    condition = ${true}
+                    renderer = ${Type.instance(props.collection, 'Neos\Eel\FlowQuery\FlowQuery') ? props.collection : q(props.collection)}
+                    renderer.@process.slice = ${value.slice(offset, limit)}
+                    renderer.@process.execute = ${value.get()}
+                }
+            }
+            totalCount = ${Type.getType(props.collection) == 'array' ? q(props.collection).count() : props.collection.count()}
+        }
+
+        list = Neos.Fusion:Renderer {
+            type = ${props.listRenderer}
+            element.collection = ${data.collection}
+        }
+        pagination = Flowpack.Listable:Pagination {
+            currentPage = ${props.currentPage}
+            totalCount = ${data.totalCount}
+            maximumNumberOfLinks = ${props.maximumNumberOfLinks}
+            itemsPerPage = ${props.itemsPerPage}
+        }
+    }
+
+    @cache {
+        mode = 'dynamic'
+        entryIdentifier {
+            node = ${node}
+        }
+        entryDiscriminator = ${request.arguments.currentPage}
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+        }
+    }
+}
