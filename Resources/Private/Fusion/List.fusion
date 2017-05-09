@@ -1,6 +1,6 @@
 # This convienince object wraps Listable with a title and an archive link
 prototype(Flowpack.Listable:List) < prototype(PackageFactory.AtomicFusion:Component) {
-    list = Flowpack.Listable:Listable
+    list = ${value}
     # These settings are public API:
     wrapClass = ''
     listTitle = ''

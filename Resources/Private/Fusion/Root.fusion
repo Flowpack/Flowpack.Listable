@@ -2,6 +2,7 @@ include: Utility.fusion
 include: Pagination.fusion
 include: QueryInterface.fusion
 include: ListRenderer.fusion
-include: Listable.fusion
+include: Collection.fusion
+include: PaginatedCollection.fusion
 include: List.fusion
 include: ListNode.fusion
