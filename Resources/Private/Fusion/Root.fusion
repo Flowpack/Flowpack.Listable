@@ -1,7 +1,5 @@
 include: Utility.fusion
 include: Pagination.fusion
-include: QueryInterface.fusion
-include: ListRenderer.fusion
 include: Collection.fusion
 include: PaginatedCollection.fusion
 include: List.fusion
