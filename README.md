@@ -61,8 +61,6 @@ Configuration options:
 | collection | An instance of `ElasticSearchQueryBuilder`, `FlowQuery` object or an `array` of nodes | 'to-be-set' |
 | itemsPerPage | Number of items per page when using pagination | 24 |
 | maximumNumberOfLinks | Number of page links in pagination | 15 |
-| listClass | Classname of UL tag | '' |
-| itemClass | Classname of LI tag wrapping each item | '' |
 | itemRenderer | Object used for rendering child items. Within it you get two context vars set: `node` and `iterator` | 'Flowpack.Listable:ContentCaseShort' |
 
 When used with ElasticSearch, build the query, but don't execute it, the object will do it for you:
