@@ -12,10 +12,6 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 5. For each of your nodetypes create a new Fusion object of type NodeTypeName + 'Short', or manually define a rendering object.
 6. Rely on public API keys when overriding settings.
 
-# Nodetype mixins
-
-On data level we provide only one mixin: `Flowpack.Listable:ListableMixin`. The only thing you have to do, is to add this mixin to nodetypes that you would want to list with this package. That's right, planing all other fields is completely up to you.
-
 # Fusion objects
 
 Keys documented here are considered public API and would be treated with semantic versioning in mind. Extend all other properties at your own risk.
