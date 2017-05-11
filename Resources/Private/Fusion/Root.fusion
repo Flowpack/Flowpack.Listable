@@ -3,4 +3,3 @@ include: Pagination.fusion
 include: Collection.fusion
 include: PaginatedCollection.fusion
 include: List.fusion
-include: ListNode.fusion
