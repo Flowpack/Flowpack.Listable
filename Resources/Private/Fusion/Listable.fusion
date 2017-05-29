@@ -21,6 +21,7 @@ prototype(Flowpack.Listable:Listable) < prototype(PackageFactory.AtomicFusion:Co
             collection.@process.sort = ${value && q(value).count() > 0 && props.sortProperty ? q(value).sort(props.sortProperty, props.sortOrder).get() : value}
             collection.@process.slice = ${value && q(value).count() > 0 ? q(value).slice(String.toInteger(props.offset), String.toInteger(props.limit)).get() : value}
             collection.@process.paginate = ${q(value).slice((props.currentPage - 1) * props.itemsPerPage, props.currentPage * props.itemsPerPage).get()}
+            collection.@process.paginate.@if.paginationEnabled = ${props.paginationEnabled}
             itemName = 'node'
             itemRenderer = Flowpack.Listable:ContentCaseShort {
                 itemRendererByObject {
