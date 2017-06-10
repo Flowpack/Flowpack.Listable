@@ -42,7 +42,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:Collection) {
 }
 ```
 
-It would use the object `Something.Custom:HereShort` for rendering each item.
+It would use the object `Something.Custom:Here.Short` for rendering each item.
 
 Make sure to correctly configure the cache.
 
