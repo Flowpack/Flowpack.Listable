@@ -9,7 +9,7 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 2. If you want a paginated list, use `Flowpack.Listable:PaginatedCollection`.
 3. If you just want a simple list, use `Flowpack.Listable:Collection` (or just `Neos.Fusion:Collection`!).
 4. If you need a list with a header and an archive link, wrap you list into `Flowpack.Listable:List`
-5. For each of your nodetypes create a new Fusion object of type NodeTypeName + 'Short', or manually define a rendering object.
+5. For each of your nodetypes create a new Fusion object of type NodeTypeName + '.Short', or manually define a rendering object.
 6. Rely on public API keys when overriding settings.
 
 # Fusion objects
