@@ -72,6 +72,24 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
 }
 ```
 
+If you have additional URL parameters (e.g for a date filter) you have to register the argument and change the cache entryDiscriminator in order work accordingly.
+HINT: Do not forget to register a corresponding route for your custom argument. 
+
+```
+prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
+  ...
+
+  prototype(Flowpack.Listable:PaginationParameters) {
+    date = ${request.arguments.data}
+  }
+
+  @cache {
+    entryDiscriminator = ${request.arguments.currentPage + request.arguments.date}
+  }
+
+} 
+```
+
 This object is configured by default to `dynamic` cache mode for pagination to work. All you have to do is add correct `entryTags` and you are all set.
 
 ## Flowpack.Listable:List
