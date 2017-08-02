@@ -5,6 +5,9 @@ prototype(Flowpack.Listable:PaginationArray) {
     totalCount = ''
     itemsPerPage = ''
 }
+
+prototype(Flowpack.Listable:PaginationParameters) < prototype(Neos.Fusion:RawArray)
+
 prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:Component) {
     totalCount = 'to-be-set'
     maximumNumberOfLinks = 15
@@ -41,7 +44,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(PackageFactory.AtomicFusion:
                     tagName = 'a'
                     attributes.href = NodeUri {
                         node = ${documentNode}
-                        additionalParams = Neos.Fusion:RawArray {
+                        additionalParams = Flowpack.Listable:PaginationParameters {
                             currentPage = ${i}
                         }
                     }
