@@ -8,5 +8,5 @@
     '@action': 'show'
   routeParts:
     node:
-      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandler
+      handler: Neos\Neos\Routing\FrontendNodeRoutePartHandlerInterface
   appendExceedingArguments: TRUE
