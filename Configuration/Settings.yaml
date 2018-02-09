@@ -11,8 +11,3 @@ Neos:
     fusion:
       autoInclude:
         Flowpack.Listable: true
-    userInterface:
-      translation:
-        autoInclude:
-          Flowpack.Listable:
-            - 'NodeTypes/*'
