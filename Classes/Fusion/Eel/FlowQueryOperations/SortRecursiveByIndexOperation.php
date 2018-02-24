@@ -50,11 +50,13 @@ class SortRecursiveByIndexOperation extends AbstractOperation
         if (!empty($arguments[0]) && in_array($arguments[0], ['ASC', 'DESC'], true)) {
             $sortOrder = $arguments[0];
         }
+        
+        $nodes = $flowQuery->getContext();
 
         $indexPathCache = [];
 
         /** @var NodeInterface $node */
-        foreach ($flowQuery->getContext() as $node) {
+        foreach ($nodes as $node) {
             // Collect the list of sorting indices for all parents of the node and the node itself
             $nodeIdentifier = $node->getIdentifier();
             $indexPath = [$node->getIndex()];
