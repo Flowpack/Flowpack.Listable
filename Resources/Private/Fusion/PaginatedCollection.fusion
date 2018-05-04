@@ -1,4 +1,4 @@
-prototype(Flowpack.Listable:PaginatedCollection) < prototype(PackageFactory.AtomicFusion:Component) {
+prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Component) {
     currentPage = ${request.arguments.currentPage || 1}
     ##################################
     # These settings are public API: #
