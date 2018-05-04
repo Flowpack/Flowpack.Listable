@@ -78,7 +78,20 @@
             "Neos.Neos-20161219094403",
             "Neos.Neos-20161219122512",
             "Neos.Fusion-20161219130100",
-            "Neos.Neos-20161220163741"
+            "Neos.Neos-20161220163741",
+            "TYPO3.Neos.NodeTypes-201309111655",
+            "Neos.NodeTypes-20161125002300",
+            "Neos.NodeTypes-20161125104800",
+            "Neos.SwiftMailer-20161130105617",
+            "Neos.ContentRepository.Search-20161210231100",
+            "Neos.Neos-20170115114620",
+            "Neos.Fusion-20170120013047",
+            "Neos.Flow-20170125103800",
+            "Neos.Seo-20170127154600",
+            "Neos.Flow-20170127183102",
+            "Neos.Fusion-20180211175500",
+            "Neos.Fusion-20180211184832",
+            "Neos.Flow-20180415105700"
         ]
     }
 }
