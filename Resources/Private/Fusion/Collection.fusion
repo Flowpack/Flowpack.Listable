@@ -7,6 +7,6 @@ prototype(Flowpack.Listable:Collection) < prototype(Neos.Fusion:Collection) {
     collection = 'must-be-set'
     itemName = 'node'
     iterationName = 'iteration'
-    itemRenderer = Flowpack.Listable:ContentCaseShort
+    itemRenderer = Flowpack.Listable:ContentCase
     itemRenderer.@process.tmpl = ${'<li class="' + itemClass + '">' + value + '</li>'}
 }

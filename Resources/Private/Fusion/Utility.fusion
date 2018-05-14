@@ -1,8 +1,13 @@
 # This object is used to render items in a list automatically with object of type ObjectType + Short
-prototype(Flowpack.Listable:ContentCaseShort) < prototype(Neos.Neos:ContentCase) {
-    default {
-        @position = 'end'
-        condition = true
+prototype(Flowpack.Listable:ContentCase) < prototype(Neos.Neos:ContentCase) {
+    nodeTypeShort {
+        @position = 'start'
+        condition = Neos.Fusion:CanRender {
+			type = ${q(node).property('_nodeType.name') + '.Short'}
+		}
         type = ${q(node).property('_nodeType.name') + '.Short'}
     }
 }
+
+# Legacy compatibility
+prototype(Flowpack.Listable:ContentCaseShort) < prototype(Flowpack.Listable:ContentCase)
