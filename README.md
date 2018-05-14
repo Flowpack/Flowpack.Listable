@@ -9,7 +9,7 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 2. If you want a paginated list, use `Flowpack.Listable:PaginatedCollection`.
 3. If you just want a simple list, use `Flowpack.Listable:Collection` (or just `Neos.Fusion:Collection`!).
 4. If you need a list with a header and an archive link, wrap you list into `Flowpack.Listable:List`
-5. For each of your nodetypes create a new Fusion object of type NodeTypeName + '.Short', or manually define a rendering object.
+5. For each of your nodetypes create a new Fusion object of type NodeTypeName + '.ListItem' or NodeTypeName + '.Short' (deprecated), or manually define a rendering object.
 6. Rely on public API keys when overriding settings.
 
 # Fusion objects
@@ -19,7 +19,7 @@ Keys documented here are considered public API and would be treated with semanti
 ## Flowpack.Listable:Collection
 
 This object is just a simple convienince wrapper around `Neos.Fusion:Collection`, use it if you want to save a few keystrokes.
-It wraps the list with UL and LI tags with a provided name and also set `Flowpack.Listable:ContentCaseShort` as a default for itemRenderer.
+It wraps the list with UL and LI tags with a provided name and also set `Flowpack.Listable:ContentCase` as a default for itemRenderer.
 
 Configuration options:
 
@@ -42,7 +42,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:Collection) {
 }
 ```
 
-It would use the object `Something.Custom:Here.Short` for rendering each item.
+It would use the object `Something.Custom:Here.ListItem` for rendering each item.
 
 Make sure to correctly configure the cache.
 
@@ -73,7 +73,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
 ```
 
 If you have additional URL parameters (e.g for a date filter) you have to register the argument and change the cache entryDiscriminator in order work accordingly.
-HINT: Do not forget to register a corresponding route for your custom argument. 
+HINT: Do not forget to register a corresponding route for your custom argument.
 
 ```
 prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
@@ -87,7 +87,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
     entryDiscriminator = ${request.arguments.currentPage + request.arguments.date}
   }
 
-} 
+}
 ```
 
 This object is configured by default to `dynamic` cache mode for pagination to work. All you have to do is add correct `entryTags` and you are all set.
