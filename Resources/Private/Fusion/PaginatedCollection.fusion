@@ -16,7 +16,7 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
                 elasticSearch {
                     condition = ${Type.instance(props.collection, 'Flowpack\ElasticSearch\ContentRepositoryAdaptor\Eel\ElasticSearchQueryBuilder')}
                     renderer = ${props.collection}
-                    renderer.@process.limit = ${value.limit(limit)}
+                    renderer.@process.limit = ${value.limit(props.itemsPerPage)}
                     renderer.@process.offset = ${value.from(offset)}
                     renderer.@process.execute = ${value.execute()}
                 }
