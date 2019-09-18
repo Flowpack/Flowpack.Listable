@@ -62,7 +62,7 @@ class FilterByReferenceOperation extends AbstractOperation
         foreach ($flowQuery->getContext() as $node) {
             /** @var NodeInterface $node */
             $propertyValue = $node->getProperty($filterByPropertyPath);
-            if ($nodeReference === $propertyValue || (is_array($propertyValue) && in_array($nodeReference, $propertyValue, true))) {
+            if ($nodeReference === $propertyValue || (is_array($propertyValue) && in_array($nodeReference, $propertyValue, false))) {
                 $filteredNodes[] = $node;
             }
         }
