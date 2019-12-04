@@ -7,7 +7,7 @@
     "description": "Tiny extension for listing things",
     "license": "MIT",
     "require": {
-        "neos/neos": "^3.3 || ^4.0 || dev-master"
+        "neos/neos": "^3.3 || ^4.0 || ^5.0 || dev-master"
     },
     "autoload": {
         "psr-4": {
