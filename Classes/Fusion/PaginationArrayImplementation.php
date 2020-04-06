@@ -10,9 +10,9 @@ class PaginationArrayImplementation extends AbstractFusionObject
     /**
      * @return array
      */
-    public function evaluate()
+    public function evaluate(): array
     {
-        $showPreviousNextLinks = $this->fusionValue('showPreviousNextLinks');
+        $showPreviousNextLinks = (bool)$this->fusionValue('showPreviousNextLinks');
         $maximumNumberOfLinks = $this->fusionValue('maximumNumberOfLinks') - 2;
         $itemsPerPage = $this->fusionValue('itemsPerPage');
         $totalCount = $this->fusionValue('totalCount');
