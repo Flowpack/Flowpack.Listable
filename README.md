@@ -58,6 +58,7 @@ Configuration options:
 | itemsPerPage | Number of items per page when using pagination | 24 |
 | maximumNumberOfLinks | Number of page links in pagination | 15 |
 | listRenderer | Object used for rendering the list. | 'Flowpack.Listable:Collection' |
+| showPreviousNextLinks| Boolean value used to decide whether the previous and next links should be added| false |
 
 When used with ElasticSearch, build the query, but don't execute it, the object will do it for you:
 
@@ -73,7 +74,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
 ```
 
 If you have additional URL parameters (e.g for a date filter) you have to register the argument and change the cache entryDiscriminator in order work accordingly.
-HINT: Do not forget to register a corresponding route for your custom argument. 
+HINT: Do not forget to register a corresponding route for your custom argument.
 
 ```
 prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
@@ -87,7 +88,7 @@ prototype(My.Custom:Object) < prototype(Flowpack.Listable:PaginatedCollection) {
     entryDiscriminator = ${request.arguments.currentPage + request.arguments.date}
   }
 
-} 
+}
 ```
 
 This object is configured by default to `dynamic` cache mode for pagination to work. All you have to do is add correct `entryTags` and you are all set.
@@ -138,6 +139,7 @@ Configuration options:
 | itemClass | A total count of items | 'Pagination-item' |
 | currentItemClass | A class for a current item | 'isCurrent' |
 | currentPage | Current page, starting with 1 | `${request.arguments.currentPage || 1}` |
+| showPreviousNextLinks| Boolean value used to decide whether the previous and next links should be added| false |
 
 # FlowQuery Helpers you can use
 

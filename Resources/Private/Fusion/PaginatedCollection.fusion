@@ -6,6 +6,7 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
     collection = 'must-be-set'
     itemsPerPage = 24
     maximumNumberOfLinks = 15
+    showPreviousNextLinks = false
     listRenderer = 'Flowpack.Listable:Collection'
 
     renderer = Neos.Fusion:Array {
@@ -39,6 +40,7 @@ prototype(Flowpack.Listable:PaginatedCollection) < prototype(Neos.Fusion:Compone
             totalCount = ${data.totalCount}
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
             itemsPerPage = ${props.itemsPerPage}
+            showPreviousNextLinks = ${props.showPreviousNextLinks}
         }
     }
 

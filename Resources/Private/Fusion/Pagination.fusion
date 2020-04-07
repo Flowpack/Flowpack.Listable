@@ -4,6 +4,7 @@ prototype(Flowpack.Listable:PaginationArray) {
     maximumNumberOfLinks = ''
     totalCount = ''
     itemsPerPage = ''
+    showPreviousNextLinks = false
 }
 
 prototype(Flowpack.Listable:PaginationParameters) < prototype(Neos.Fusion:RawArray)
@@ -12,6 +13,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
     totalCount = 'to-be-set'
     maximumNumberOfLinks = 15
     itemsPerPage = 24
+    showPreviousNextLinks = false
 
     class = 'Pagination'
     itemClass = 'Pagination-item'
@@ -26,6 +28,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
             totalCount = ${props.totalCount}
             itemsPerPage = ${props.itemsPerPage}
+            showPreviousNextLinks = ${props.showPreviousNextLinks}
         }
         itemName = 'i'
         itemRenderer = Neos.Fusion:Case {
@@ -37,8 +40,36 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                 condition = ${String.toInteger(i) == String.toInteger(props.currentPage)}
                 renderer = ${'<li class="' + props.itemClass + ' ' + props.currentItemClass + '"><a>' + i + '</a></li>'}
             }
+            previous {
+                condition = ${i == 'previous'  && (props.showPreviousNextLinks == true)}
+                renderer = Neos.Fusion:Tag {
+                    @process.tmpl = ${'<li class="previous">' + value + '</li>'}
+                    tagName = 'a'
+                    attributes.href = Neos.Neos:NodeUri {
+                        node = ${documentNode}
+                        additionalParams = Flowpack.Listable:PaginationParameters {
+                            currentPage = ${String.toInteger(props.currentPage) - 1}
+                        }
+                    }
+                    content = ${i}
+                }
+            }
+            next {
+                condition = ${i == 'next' && (props.showPreviousNextLinks == true)}
+                renderer = Neos.Fusion:Tag {
+                    @process.tmpl = ${'<li class="next">' + value + '</li>'}
+                    tagName = 'a'
+                    attributes.href = Neos.Neos:NodeUri {
+                        node = ${documentNode}
+                        additionalParams = Flowpack.Listable:PaginationParameters {
+                            currentPage = ${String.toInteger(props.currentPage) + 1}
+                        }
+                    }
+                    content = ${i}
+                }
+            }
             link {
-                condition = ${true}
+                condition = ${(iterator.isFirst == false && iterator.isLast == false) || (props.showPreviousNextLinks == false)}
                 renderer = Neos.Fusion:Tag {
                     @process.tmpl = ${'<li class="' + props.itemClass + '">' + value + '</li>'}
                     tagName = 'a'
