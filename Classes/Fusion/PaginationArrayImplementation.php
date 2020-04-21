@@ -1,5 +1,4 @@
 <?php
-
 namespace Flowpack\Listable\Fusion;
 
 use Neos\Flow\Annotations as Flow;
@@ -37,11 +36,11 @@ class PaginationArrayImplementation extends AbstractFusionObject
         $displayRangeEnd = (integer)min($displayRangeEnd, $numberOfPages);
         $links = \range($displayRangeStart, $displayRangeEnd);
         if ($displayRangeStart > 2) {
-            array_unshift($links, "...");
+            array_unshift($links, '...');
             array_unshift($links, 1);
         }
         if ($displayRangeEnd + 1 < $numberOfPages) {
-            $links[] = "...";
+            $links[] = '...';
             $links[] = $numberOfPages;
         }
 
