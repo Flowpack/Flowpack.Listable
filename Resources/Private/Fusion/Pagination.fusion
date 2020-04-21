@@ -51,13 +51,13 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                             currentPage = ${String.toInteger(props.currentPage) - 1}
                         }
                     }
-                    content = ${i}
+                    content = ${Translation.translate(i, i, [], 'Main', 'Flowpack.Listable') }
                 }
             }
             next {
                 condition = ${i == 'next' && (props.showPreviousNextLinks == true)}
                 renderer = Neos.Fusion:Tag {
-                    @process.tmpl = ${'<li class="next">' + value + '</li>'}
+                    @process.tmpl = ${'<li class="next">' + value  + '</li>'}
                     tagName = 'a'
                     attributes.href = Neos.Neos:NodeUri {
                         node = ${documentNode}
@@ -65,7 +65,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                             currentPage = ${String.toInteger(props.currentPage) + 1}
                         }
                     }
-                    content = ${i}
+                    content = ${Translation.translate(i, i, [], 'Main', 'Flowpack.Listable') }
                 }
             }
             link {
