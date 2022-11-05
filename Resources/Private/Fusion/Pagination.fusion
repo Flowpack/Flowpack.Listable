@@ -45,6 +45,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                 renderer = Neos.Fusion:Tag {
                     @process.tmpl = ${'<li class="previous">' + value + '</li>'}
                     tagName = 'a'
+                    attributes.rel = 'prev'
                     attributes.href = Neos.Neos:NodeUri {
                         node = ${documentNode}
                         additionalParams = Flowpack.Listable:PaginationParameters {
@@ -59,6 +60,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                 renderer = Neos.Fusion:Tag {
                     @process.tmpl = ${'<li class="next">' + value  + '</li>'}
                     tagName = 'a'
+                    attributes.rel = 'next'
                     attributes.href = Neos.Neos:NodeUri {
                         node = ${documentNode}
                         additionalParams = Flowpack.Listable:PaginationParameters {
