@@ -15,7 +15,7 @@ use Neos\Eel\FlowQuery\Operations\AbstractOperation;
  *
  * Use it like this:
  *
- *    ${q(node).children().sortRecursive(['ASC'|'DESC'])}
+ *    ${q(node).children().sortRecursiveByIndex(['ASC'|'DESC'])}
  */
 class SortRecursiveByIndexOperation extends AbstractOperation
 {
