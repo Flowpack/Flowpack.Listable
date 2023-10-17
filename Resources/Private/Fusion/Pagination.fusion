@@ -15,9 +15,11 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
     itemsPerPage = 24
     showPreviousNextLinks = false
 
-    class = 'Pagination'
-    itemClass = 'Pagination-item'
-    currentItemClass = 'isCurrent'
+    @process.tmpl = ${'<nav>' + value + '</nav>'}
+    class = 'pagination'
+    itemClass = 'page-item'
+    linkClass = 'page-link'
+    currentItemClass = 'active'
     currentPage = ${request.arguments.currentPage || 1}
 
     renderer = Neos.Fusion:Collection {
@@ -34,11 +36,11 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
         itemRenderer = Neos.Fusion:Case {
             separator {
                 condition = ${i == '...'}
-                renderer = ${'<li class="' + props.itemClass + '">' + i + '</li>'}
+                renderer = ${'<li class="' + props.itemClass + '"><a class="' + props.linkClass + '">' + i + '</a></li>'}
             }
             currentPage {
                 condition = ${String.toInteger(i) == String.toInteger(props.currentPage)}
-                renderer = ${'<li class="' + props.itemClass + ' ' + props.currentItemClass + '"><a>' + i + '</a></li>'}
+                renderer = ${'<li class="' + props.itemClass + ' ' + props.currentItemClass + '"><a class="' + props.linkClass + '">' + i + '</a></li>'}
             }
             previous {
                 condition = ${i == 'previous'  && (props.showPreviousNextLinks == true)}
@@ -75,11 +77,14 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
                 renderer = Neos.Fusion:Tag {
                     @process.tmpl = ${'<li class="' + props.itemClass + '">' + value + '</li>'}
                     tagName = 'a'
-                    attributes.href = Neos.Neos:NodeUri {
-                        node = ${documentNode}
-                        additionalParams = Flowpack.Listable:PaginationParameters {
-                            currentPage = ${i}
+                    attributes {
+                        href = Neos.Neos:NodeUri {
+                            node = ${documentNode}
+                            additionalParams = Flowpack.Listable:PaginationParameters {
+                                currentPage = ${i}
+                            }
                         }
+                        class = ${props.linkClass}
                     }
                     content = ${i}
                 }
