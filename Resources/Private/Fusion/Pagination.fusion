@@ -23,7 +23,7 @@ prototype(Flowpack.Listable:Pagination) < prototype(Neos.Fusion:Component) {
     renderer = Neos.Fusion:Loop {
         @if.paginationNeeded = ${(props.totalCount/props.itemsPerPage) > 1}
         @process.tmpl = ${'<ul class="' + props.class + '">' + value + '</ul>'}
-        collection = Flowpack.Listable:PaginationArray {
+        items = Flowpack.Listable:PaginationArray {
             currentPage = ${props.currentPage}
             maximumNumberOfLinks = ${props.maximumNumberOfLinks}
             totalCount = ${props.totalCount}
