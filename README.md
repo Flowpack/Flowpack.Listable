@@ -157,4 +157,4 @@ Sort nodes by their position in the node tree. Please use with care, as this can
 
 Example:
 
-    ${q(node).children("main").sortRecursiveByIndex(['ASC'|'DESC']).get()}
+    ${q(node).children("main").sortRecursiveByIndex('DESC').get()}
