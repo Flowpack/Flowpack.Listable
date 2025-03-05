@@ -36,7 +36,7 @@ class SortRecursiveByIndexOperation extends AbstractOperation
      */
     protected static $priority = 100;
 
-    #[\Neos\Flow\Annotations\Inject]
+    #[Flow\Inject]
     protected ContentRepositoryRegistry $contentRepositoryRegistry;
 
     /**
