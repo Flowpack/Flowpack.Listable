@@ -147,10 +147,6 @@ Configuration options:
 
 Filter nodes by properties of type date.
 
-## filterByReference
-
-Filter nodes by properties of type reference or references.
-
 ## sortRecursiveByIndex
 
 Sort nodes by their position in the node tree. Please use with care, as this can become a very expensive operation, if you operate on bigger subtrees.
