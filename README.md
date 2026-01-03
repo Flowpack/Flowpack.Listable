@@ -25,7 +25,7 @@ Configuration options:
 
 | Setting | Description | Defaults |
 |---------|-------------|----------|
-| collection | An instance of `ElasticSearchQueryBuilder`, `FlowQuery` object or an `array` of nodes | 'to-be-set' |
+| items | An instance of `ElasticSearchQueryBuilder`, `FlowQuery` object or an `array` of nodes | 'to-be-set' |
 | listClass | Classname of UL tag | '' |
 | itemClass | Classname of LI tag wrapping each item | '' |
 | itemRenderer | Object used for rendering child items. Within it you get two context vars set: `node` and `iterator` | 'Flowpack.Listable:ContentCaseShort' |
@@ -36,7 +36,7 @@ Example:
 
 ```
 prototype(My.Custom:Object) < prototype(Flowpack.Listable:Collection) {
-  collection = ${q(site).find('[instanceof Something.Custom:Here]').sort('date', 'DESC').slice(0, 6).get()}
+  items = ${q(site).find('[instanceof Something.Custom:Here]').sort('date', 'DESC').slice(0, 6).get()}
   listClass = 'MyList'
   itemClass = 'MyList-item'
 }
