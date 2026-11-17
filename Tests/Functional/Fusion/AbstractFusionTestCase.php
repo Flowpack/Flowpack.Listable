@@ -2,11 +2,8 @@
 namespace Flowpack\Listable\Tests\Functional\Fusion;
 
 use Neos\Flow\Mvc\ActionRequest;
-use Neos\Flow\Mvc\ActionResponse;
-use Neos\Flow\Mvc\Controller\Arguments;
-use Neos\Flow\Mvc\Controller\ControllerContext;
-use Neos\Flow\Mvc\Routing\UriBuilder;
 use Neos\Flow\Tests\FunctionalTestCase;
+use Neos\Fusion\Core\FusionGlobals;
 use Neos\Fusion\Core\FusionSourceCodeCollection;
 use Neos\Fusion\Core\RuntimeFactory;
 use Psr\Http\Message\ServerRequestFactoryInterface;
@@ -25,10 +22,8 @@ abstract class AbstractFusionTestCase extends FunctionalTestCase
 
     /**
      * Evaluates the Fusion path $fusionPath, defined in $fusionSourceCode, with this package's Fusion loaded.
-     *
-     * @return mixed
      */
-    protected function evaluateFusion(string $fusionPath, string $fusionSourceCode)
+    protected function evaluateFusion(string $fusionPath, string $fusionSourceCode): mixed
     {
         $sourceCode = FusionSourceCodeCollection::empty();
         foreach (static::FUSION_FILES as $fusionFile) {
@@ -37,20 +32,16 @@ abstract class AbstractFusionTestCase extends FunctionalTestCase
         $sourceCode = $sourceCode->union(FusionSourceCodeCollection::fromString($fusionSourceCode));
 
         $runtime = $this->objectManager->get(RuntimeFactory::class)
-            ->createFromSourceCode($sourceCode, $this->buildControllerContext());
+            ->createFromSourceCode($sourceCode, FusionGlobals::fromArray(['request' => $this->buildActionRequest()]));
 
         return $runtime->evaluate($fusionPath);
     }
 
-    private function buildControllerContext(): ControllerContext
+    private function buildActionRequest(): ActionRequest
     {
         $httpRequest = $this->objectManager->get(ServerRequestFactoryInterface::class)
             ->createServerRequest('GET', 'http://localhost/');
-        $request = ActionRequest::fromHttpRequest($httpRequest);
 
-        $uriBuilder = new UriBuilder();
-        $uriBuilder->setRequest($request);
-
-        return new ControllerContext($request, new ActionResponse(), new Arguments([]), $uriBuilder);
+        return ActionRequest::fromHttpRequest($httpRequest);
     }
 }

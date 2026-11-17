@@ -1,15 +1,15 @@
 <?php
 namespace Flowpack\Listable\Tests\Functional\Fusion;
 
+use PHPUnit\Framework\Attributes\Test;
+
 /**
  * Tests the page links computed by Flowpack.Listable:PaginationArray
  * (Flowpack\Listable\Fusion\PaginationArrayImplementation), evaluated through the Fusion runtime.
  */
 class PaginationArrayTest extends AbstractFusionTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function firstPage(): void
     {
         $this->assertPaginationLinks(
@@ -27,9 +27,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function middlePageWithGapsOnBothSides(): void
     {
         $this->assertPaginationLinks(
@@ -47,9 +45,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function firstPageIsLinkedWithoutSeparatorWhenTheRangeStartsAtPageTwo(): void
     {
         $this->assertPaginationLinks(
@@ -67,9 +63,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function lastPageIsLinkedWithoutSeparatorWhenTheRangeEndsAtTheSecondToLastPage(): void
     {
         $this->assertPaginationLinks(
@@ -87,9 +81,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function lastPage(): void
     {
         $this->assertPaginationLinks(
@@ -107,9 +99,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function partiallyFilledLastPageCountsAsPage(): void
     {
         $this->assertPaginationLinks(
@@ -127,9 +117,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fewerPagesThanLinks(): void
     {
         $this->assertPaginationLinks(
@@ -147,9 +135,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function singlePage(): void
     {
         $this->assertPaginationLinks(
@@ -167,9 +153,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noLinksWithoutItems(): void
     {
         $this->assertPaginationLinks(
@@ -187,9 +171,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function previousAndNextLinksOnAMiddlePage(): void
     {
         $this->assertPaginationLinks(
@@ -207,9 +189,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function previousLinkStaysInFrontOfTheFirstPageLink(): void
     {
         $this->assertPaginationLinks(
@@ -227,9 +207,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noPreviousLinkOnTheFirstPage(): void
     {
         $this->assertPaginationLinks(
@@ -247,9 +225,7 @@ class PaginationArrayTest extends AbstractFusionTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noNextLinkOnTheLastPage(): void
     {
         $this->assertPaginationLinks(

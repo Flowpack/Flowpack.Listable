@@ -12,6 +12,15 @@ The idea is very simple: you often need to display list of things (e.g. news, ar
 5. For each of your nodetypes create a new Fusion object of type NodeTypeName + '.Short', or manually define a rendering object.
 6. Rely on public API keys when overriding settings.
 
+# Versioning scheme
+
+| Package Version             | Branch | Neos / Flow Version | PHP Version | Supported | Remarks                                                         |
+|-----------------------------|--------|---------------------|-------------|-----------|-----------------------------------------------------------------|
+| 4.x (current `main` branch) | `main` | 9.x                 | >= 8.2      | ☑️        | Neos 9 / new Content Repository.                                |
+| 3.6.x                       | `3.6`  | 3.3 – 8.x           |             | ☑️        | Bugfixes for Neos 8 (and older) installations.                  |
+| 3.0 – 3.5                   |        | 3.x – 7.x           |             | ⛔️        | Superseded by 3.6.x.                                            |
+| 2.x and older               |        | 3.x and older       |             | ⛔️        |                                                                 |
+
 # Fusion objects
 
 Keys documented here are considered public API and would be treated with semantic versioning in mind. Extend all other properties at your own risk.
@@ -166,5 +175,9 @@ afterwards:
     # custom distribution directory and additional PHPUnit arguments
     Tests/Functional/run-tests.sh /tmp/listable-tests -- --filter PaginationArrayTest
 
+    # another Neos 9 minor version (default: 9.2)
+    NEOS_VERSION=9.0 Tests/Functional/run-tests.sh
+
 Delete the distribution directory to start from scratch. The same script runs in the GitHub CI
-(`.github/workflows/tests.yml`).
+(`.github/workflows/tests.yml`), against the lowest and the newest supported Neos version. The `3.6` branch has
+the same setup for Neos 8.3.

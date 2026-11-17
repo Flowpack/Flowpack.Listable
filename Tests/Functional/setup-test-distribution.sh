@@ -5,13 +5,17 @@
 # Functional tests boot a full Flow application, so they can't run from the package root alone.
 # Used by run-tests.sh and the GitHub CI (.github/workflows/tests.yml).
 #
-# Usage: Tests/Functional/setup-test-distribution.sh [target-directory]
+# Usage: [NEOS_VERSION=9.2] Tests/Functional/setup-test-distribution.sh [target-directory]
+#
+# NEOS_VERSION is the Neos minor version to test against (default: 9.2). The CI tests the lowest and the
+# newest supported one.
 #
 # The target directory must be OUTSIDE of this package: the package is symlinked into it.
 set -euo pipefail
 
 PACKAGE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-TARGET_DIR="${1:-${TMPDIR:-/tmp}/flowpack-listable-test-distribution}"
+NEOS_VERSION="${NEOS_VERSION:-9.2}"
+TARGET_DIR="${1:-${TMPDIR:-/tmp}/flowpack-listable-test-distribution-neos-$NEOS_VERSION}"
 TARGET_DIR="${TARGET_DIR%/}"
 
 case "$TARGET_DIR/" in
@@ -36,19 +40,21 @@ cat > "$TARGET_DIR/composer.json" <<EOF
             "options": {
                 "symlink": true,
                 "versions": {
-                    "flowpack/listable": "3.6.x-dev"
+                    "flowpack/listable": "dev-main"
                 }
             }
         }
     ],
     "require": {
-        "flowpack/listable": "3.6.x-dev",
-        "neos/neos": "~8.3.0"
+        "flowpack/listable": "dev-main",
+        "neos/neos": "~$NEOS_VERSION.0",
+        "neos/contentgraph-doctrinedbaladapter": "~$NEOS_VERSION.0",
+        "neos/neos-ui": "~$NEOS_VERSION.0"
     },
     "require-dev": {
-        "neos/buildessentials": "~8.3.0",
-        "phpunit/phpunit": "~9.6",
-        "mikey179/vfsstream": "^1.6.10"
+        "neos/buildessentials": "~$NEOS_VERSION.0",
+        "phpunit/phpunit": "~11.5",
+        "mikey179/vfsstream": "^1.6.12"
     },
     "autoload-dev": {
         "psr-4": {
@@ -75,17 +81,6 @@ EOF
 # directory to PHP_INI_SCAN_DIR, which reaches every PHP process it starts.
 mkdir -p "$TARGET_DIR/php-ini"
 echo 'memory_limit = -1' > "$TARGET_DIR/php-ini/memory-limit.ini"
-
-mkdir -p "$TARGET_DIR/Configuration/Testing"
-cat > "$TARGET_DIR/Configuration/Testing/Settings.yaml" <<'EOF'
-Neos:
-  Flow:
-    object:
-      # In the Testing context Flow reflects the test classes of all packages. The tests of neos/party 7.1
-      # use PHPUnit 10 attributes, while Neos 8.3 runs PHPUnit 9 - skip them, we never run them anyway.
-      includeClasses:
-        'Neos.Party': ['Neos\\Party\\(?!Tests\\).*']
-EOF
 
 cd "$TARGET_DIR"
 composer update --no-interaction --no-progress
