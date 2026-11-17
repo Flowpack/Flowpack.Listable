@@ -154,3 +154,17 @@ Sort nodes by their position in the node tree. Please use with care, as this can
 Example:
 
     ${q(node).children("main").sortRecursiveByIndex('DESC').get()}
+
+# Running the tests
+
+The functional tests boot a Flow application, so they run inside a throwaway Neos distribution with this package
+symlinked into it. The script creates the distribution on the first run (in your temp directory) and reuses it
+afterwards:
+
+    Tests/Functional/run-tests.sh
+
+    # custom distribution directory and additional PHPUnit arguments
+    Tests/Functional/run-tests.sh /tmp/listable-tests -- --filter PaginationArrayTest
+
+Delete the distribution directory to start from scratch. The same script runs in the GitHub CI
+(`.github/workflows/tests.yml`).
