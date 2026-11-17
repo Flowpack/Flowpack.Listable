@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, '[0-9]+.[0-9]+' ]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  functional-tests:
+    name: Functional tests (PHP ${{ matrix.php-version }}, Neos 8.3)
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [ '8.2', '8.3' ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, pdo_sqlite
+          tools: composer:v2
+          coverage: none
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ runner.os }}-php${{ matrix.php-version }}-${{ hashFiles('composer.json', 'Tests/Functional/setup-test-distribution.sh') }}
+          restore-keys: composer-${{ runner.os }}-php${{ matrix.php-version }}-
+
+      - name: Run functional tests
+        # builds a throwaway Neos distribution with this package symlinked into it, see the script
+        run: Tests/Functional/run-tests.sh "$RUNNER_TEMP/test-distribution"
