@@ -8,88 +8,294 @@ namespace Flowpack\Listable\Tests\Functional\Fusion;
 class PaginationArrayTest extends AbstractFusionTestCase
 {
     /**
-     * @return array<string, array{int, int, int, int, bool, array<int|string>}>
-     *   currentPage, numberOfPages, maximumNumberOfLinks, itemsPerPage, showPreviousNextLinks, expected links
+     * @test
      */
-    public function paginationDataProvider(): array
+    public function firstPage(): void
     {
-        return [
-            'first page' => [1, 10, 5, 10, false, [1, 2, 3, '...', 10]],
-            'middle page with gaps on both sides' => [5, 10, 5, 10, false, [1, '...', 4, 5, 6, '...', 10]],
-            'last page' => [10, 10, 5, 10, false, [1, '...', 8, 9, 10]],
-            'fewer pages than links' => [2, 3, 5, 10, false, [1, 2, 3]],
-            'single page' => [1, 1, 5, 10, false, [1]],
-            'previous and next links on a middle page' => [5, 10, 5, 10, true, ['previous', 1, '...', 4, 5, 6, '...', 10, 'next']],
-            'no previous link on the first page' => [1, 10, 5, 10, true, [1, 2, 3, '...', 10, 'next']],
-            'no next link on the last page' => [10, 10, 5, 10, true, ['previous', 1, '...', 8, 9, 10]],
-        ];
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 100,
+            currentPage: 1,
+
+            // expected
+            expectedLinks: [1, 2, 3, '...', 10]
+        );
     }
 
     /**
      * @test
-     * @dataProvider paginationDataProvider
+     */
+    public function middlePageWithGapsOnBothSides(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 100,
+            currentPage: 5,
+
+            // expected
+            expectedLinks: [1, '...', 4, 5, 6, '...', 10]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function firstPageIsLinkedWithoutSeparatorWhenTheRangeStartsAtPageTwo(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 100,
+            currentPage: 3,
+
+            // expected
+            expectedLinks: [1, 2, 3, 4, '...', 10]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function lastPageIsLinkedWithoutSeparatorWhenTheRangeEndsAtTheSecondToLastPage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 100,
+            currentPage: 8,
+
+            // expected
+            expectedLinks: [1, '...', 7, 8, 9, 10]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function lastPage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 100,
+            currentPage: 10,
+
+            // expected
+            expectedLinks: [1, '...', 8, 9, 10]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function partiallyFilledLastPageCountsAsPage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 95,
+            currentPage: 1,
+
+            // expected
+            expectedLinks: [1, 2, 3, '...', 10]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function fewerPagesThanLinks(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 30,
+            currentPage: 2,
+
+            // expected
+            expectedLinks: [1, 2, 3]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function singlePage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 10,
+            currentPage: 1,
+
+            // expected
+            expectedLinks: [1]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function noLinksWithoutItems(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: false,
+
+            // state
+            totalCount: 0,
+            currentPage: 1,
+
+            // expected
+            expectedLinks: []
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function previousAndNextLinksOnAMiddlePage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: true,
+
+            // state
+            totalCount: 100,
+            currentPage: 5,
+
+            // expected
+            expectedLinks: ['previous', 1, '...', 4, 5, 6, '...', 10, 'next']
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function previousLinkStaysInFrontOfTheFirstPageLink(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: true,
+
+            // state
+            totalCount: 100,
+            currentPage: 3,
+
+            // expected
+            expectedLinks: ['previous', 1, 2, 3, 4, '...', 10, 'next']
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function noPreviousLinkOnTheFirstPage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: true,
+
+            // state
+            totalCount: 100,
+            currentPage: 1,
+
+            // expected
+            expectedLinks: [1, 2, 3, '...', 10, 'next']
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function noNextLinkOnTheLastPage(): void
+    {
+        $this->assertPaginationLinks(
+            // settings
+            itemsPerPage: 10,
+            maximumNumberOfLinks: 5,
+            showPreviousNextLinks: true,
+
+            // state
+            totalCount: 100,
+            currentPage: 10,
+
+            // expected
+            expectedLinks: ['previous', 1, '...', 8, 9, 10]
+        );
+    }
+
+    /**
      * @param array<int|string> $expectedLinks
      */
-    public function paginationArrayContainsExpectedLinks(
-        int $currentPage,
-        int $numberOfPages,
-        int $maximumNumberOfLinks,
+    private function assertPaginationLinks(
+        // settings
         int $itemsPerPage,
+        int $maximumNumberOfLinks,
         bool $showPreviousNextLinks,
+        // state
+        int $totalCount,
+        int $currentPage,
+        // expected
         array $expectedLinks
     ): void {
-        $links = $this->evaluatePaginationArray(
-            $currentPage,
-            $numberOfPages * $itemsPerPage,
-            $maximumNumberOfLinks,
-            $itemsPerPage,
-            $showPreviousNextLinks
-        );
-
-        // compared as strings, the way they are rendered: the last page is computed with ceil() and is a float
-        self::assertSame(self::toStrings($expectedLinks), self::toStrings($links));
-    }
-
-    /**
-     * @test
-     */
-    public function paginationArrayIsEmptyWithoutItems(): void
-    {
-        self::assertSame([], $this->evaluatePaginationArray(1, 0, 5, 10, false));
-    }
-
-    /**
-     * @param array<int|float|string> $links
-     * @return array<string>
-     */
-    private static function toStrings(array $links): array
-    {
-        return array_map(static fn ($link): string => (string)$link, $links);
-    }
-
-    /**
-     * @return array<int|float|string>
-     */
-    private function evaluatePaginationArray(
-        int $currentPage,
-        int $totalCount,
-        int $maximumNumberOfLinks,
-        int $itemsPerPage,
-        bool $showPreviousNextLinks
-    ): array {
-        return $this->evaluateFusion('pagination', sprintf(
+        $links = $this->evaluateFusion('pagination', sprintf(
             'pagination = Flowpack.Listable:PaginationArray {
                 currentPage = %d
                 totalCount = %d
-                maximumNumberOfLinks = %d
                 itemsPerPage = %d
+                maximumNumberOfLinks = %d
                 showPreviousNextLinks = %s
             }',
             $currentPage,
             $totalCount,
-            $maximumNumberOfLinks,
             $itemsPerPage,
+            $maximumNumberOfLinks,
             $showPreviousNextLinks ? 'true' : 'false'
         ));
+
+        self::assertSame($expectedLinks, $links);
     }
 }
