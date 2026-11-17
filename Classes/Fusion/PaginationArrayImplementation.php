@@ -19,7 +19,7 @@ class PaginationArrayImplementation extends AbstractFusionObject
         if ($totalCount > 0 !== true) {
             return [];
         }
-        $numberOfPages = ceil($totalCount / $itemsPerPage);
+        $numberOfPages = (int)ceil($totalCount / $itemsPerPage);
         if ($maximumNumberOfLinks > $numberOfPages) {
             $maximumNumberOfLinks = $numberOfPages;
         }
@@ -35,12 +35,16 @@ class PaginationArrayImplementation extends AbstractFusionObject
         $displayRangeStart = (integer)max($displayRangeStart, 1);
         $displayRangeEnd = (integer)min($displayRangeEnd, $numberOfPages);
         $links = \range($displayRangeStart, $displayRangeEnd);
-        if ($displayRangeStart > 2) {
-            array_unshift($links, '...');
+        if ($displayRangeStart > 1) {
+            if ($displayRangeStart > 2) {
+                array_unshift($links, '...');
+            }
             array_unshift($links, 1);
         }
-        if ($displayRangeEnd + 1 < $numberOfPages) {
-            $links[] = '...';
+        if ($displayRangeEnd < $numberOfPages) {
+            if ($displayRangeEnd + 1 < $numberOfPages) {
+                $links[] = '...';
+            }
             $links[] = $numberOfPages;
         }
 
